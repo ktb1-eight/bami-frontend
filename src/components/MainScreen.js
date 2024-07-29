@@ -14,7 +14,7 @@ const MainScreen = () => {
       <Header />
       <main>
         <div className="intro">
-          <h1>한달살이에 특화된 새로운 여행 플래너</h1>
+          <h1>한달살이에 특화된<div>새로운 여행 플래너</div></h1>
           <p>AI가 도와주는 Bami와 함께 빠르게 스케줄링 해보세요</p>
           <button id = "startButton">스케줄링하러 가기</button>
         </div>

@@ -11,7 +11,11 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
+<<<<<<< HEAD
     "react-scripts": "5.0.1",
+=======
+    "react-scripts": "^3.0.1",
+>>>>>>> bc546ee ([Feat] 식당 정보에 사진, 평점, 리뷰 수 추가 및 UI 업데이트)
     "web-vitals": "^4.2.2"
   },
   "proxy": "http://localhost:8080",

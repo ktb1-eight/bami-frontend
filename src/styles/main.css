@@ -20,30 +20,29 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 100px;
-  background: linear-gradient(to right, #f0f9ff, #c9f1fd);
+  margin-top: 120px;
+  background: linear-gradient(to right, #e1eef7, #ade6fa);
   padding: 60px 40px;
   border-radius: 10px; 
   width: 100vw;
-  height: 400px;
   box-sizing: border-box; 
 }
 
 .intro h1 {
-  margin-top: 50px;
-  font-size: 36px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 60px;
+  margin-bottom: 10px;
   text-align: left;
 }
 
 .intro p {
-  font-size: 18px;
-  margin-bottom: 40px;
+  font-size: 22px;
+  margin-bottom: 80px;
   text-align: left;
 }
 
 #startButton {
-  padding: 10px 20px;
+  padding: 20px 20px;
   font-size: 20px;
   border-radius: 10px;
   background-color: #333;
