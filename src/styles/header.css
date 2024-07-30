@@ -8,6 +8,8 @@ header {
   
   header .logo {
     font-weight: bold;
+    width: 34px;
+    height: 33.27px;
   }
   
   header nav {
@@ -34,4 +36,16 @@ header {
   header .profile {
     font-size: 20px;
     margin-left: 20px;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
   }
