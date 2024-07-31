@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import '../styles/login.css';
+import naver from '../images/naver.png';
+import google from '../images/google.png';
+import kakao from '../images/kakao.png';
+
 
 const Login = ({ config }) => {
 
@@ -9,7 +13,7 @@ const Login = ({ config }) => {
         if(urlParams.has('accessToken')) {
             const accessToken = urlParams.get('accessToken');
             localStorage.setItem('accessToken', accessToken);
-            alert('AccessToken 로컬스토리지 저장');
+            // alert('AccessToken 로컬스토리지 저장');
             window.location.href = "/";
         }
         const accessToken = localStorage.getItem('accessToken');
@@ -31,13 +35,13 @@ const Login = ({ config }) => {
                 </div>
                 <div className='loginLinks'>
                     <a href={`https://nid.naver.com/oauth2.0/authorize?client_id=${naverClientId}&response_type=code&redirect_uri=${naverRedirectUri}&state=STATE_STRING`}>
-                        <img src='../images/naver.png' alt='Naver Login' className='loginImage' />
+                        <img src={naver} alt='Naver Login' className='loginImage' />
                     </a>
                     <a href={`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${kakaoRedirectUri}&response_type=code`}>
-                        <img src="../images/kakao.png" alt="Kakao Login" className="loginImage" />
+                        <img src={kakao} alt="Kakao Login" className="loginImage" />
                     </a>
-                    <a href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&response_type=code&scope=profile`}>
-                        <img src='../images/google.png' alt='Google Login' className='loginImage' />
+                    <a href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&response_type=code&scope=profile%20email`}>
+                        <img src={google} alt='Google Login' className='loginImage' />
                     </a>
                 </div>
             </main>

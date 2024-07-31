@@ -56,7 +56,7 @@ const Header = () => {
         </nav>
         {userImage ? (
           <a className="profile" href="/profile">
-            <img src={userImage} alt={userName} className="profile-image" />
+            <img src={userImage} alt={userImage} className="profile-image" />
           </a>
         ) : (
           <a className="profile" href="/login">로그인</a>

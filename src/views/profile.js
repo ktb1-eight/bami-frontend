@@ -50,11 +50,11 @@ const Profile = () => {
                 </div>
                 <div className='input-group'>
                     <p className='description'>이메일</p>
-                    <input type="text" value={userInfo.email} readOnly id='input_email' />
+                    <input type="text" value={userInfo.email} readOnly disabled id='input_email' />
                 </div>
                 <button id='delete_account'>회원탈퇴</button>
                 <div id='button_group'>
-                    <button id='go_back'>돌아가기</button>
+                    <button id='go_back'>로그아웃</button>
                     <button id='save'>저장</button>
                 </div>
             </div>
