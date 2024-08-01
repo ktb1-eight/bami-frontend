@@ -4,36 +4,129 @@ import Header from '../components/Header';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState(null);
+    const [editedName, setEditedName] = useState('');
+    const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
-        if (accessToken) {
+        const fetchUserInfo = (accessToken) => {
             fetch('/api/user-info', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
             })
-            .then (response => {
-                if(response.status === 200) {
+            .then(response => {
+                if (response.status === 200) {
                     return response.json();
+                } else if (response.status === 401) {
+                    return refreshToken().then(newAccessToken => fetchUserInfo(newAccessToken));
                 } else {
                     throw new Error('Invalid token');
                 }
             })
-            .then (data => {
+            .then(data => {
                 setUserInfo(data);
+                setEditedName(data.name);
             })
             .catch(error => {
                 console.error('Error fetching user info: ', error);
                 localStorage.removeItem('accessToken');
                 window.location.href = '/login';
-            })
+            });
+        };
+
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+            fetchUserInfo(accessToken);
         } else {
             window.location.href = "/login";
         }
     }, []);
 
-    if(!userInfo) {
+    useEffect(() => {
+        if (userInfo && editedName !== userInfo.name) {
+            setIsSaveEnabled(true);
+        } else {
+            setIsSaveEnabled(false);
+        }
+    }, [editedName, userInfo]);
+
+    const refreshToken = () => {
+        return fetch('/api/refresh-token', {
+            method: 'GET',
+            credentials: 'include' // Ensure cookies are sent with the request
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Failed to refresh token');
+            }
+        })
+        .then(data => {
+            localStorage.setItem('accessToken', data.accessToken);
+            return data.accessToken;
+        })
+        .catch(error => {
+            console.error('Error refreshing token: ', error);
+            localStorage.removeItem('accessToken');
+            window.location.href = '/login';
+        });
+    };
+
+    const handleSave = () => {
+        const accessToken = localStorage.getItem('accessToken');
+
+        fetch('/api/update-user-info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + accessToken
+            },
+            body: JSON.stringify({ name: editedName })
+        })
+        .then(response => {
+            if (response.status === 200) {
+                alert('수정되었습니다!');
+                setUserInfo({ ...userInfo, name: editedName });
+                setIsSaveEnabled(false); // 저장 후 버튼 비활성화
+            } else {
+                throw new Error('Failed to update user info');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating user info: ', error);
+        });
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        window.location.href = '/login';
+    };
+
+    const handleDeleteAccount = () => {
+        const accessToken = localStorage.getItem('accessToken');
+
+        fetch('/api/delete-account', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+        })
+        .then(response => {
+            if(response.status === 200) {
+                alert('탈퇴 되었습니다.');
+                localStorage.removeItem('accessToken');
+                window.location.href = '/';
+            } else {
+                throw new Error('Failed to delete account');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting account: ', error);
+        });
+    };
+
+    if (!userInfo) {
         return <div>로딩중</div>;
     }
 
@@ -46,16 +139,21 @@ const Profile = () => {
                 <p id='profile_setting'>프로필 설정</p>
                 <div className='input-group'>
                     <p className='description'>닉네임</p>
-                    <input type="text" value={userInfo.name} id='input_name'/>
+                    <input
+                        type="text"
+                        value={editedName}
+                        onChange={(e) => setEditedName(e.target.value)}
+                        id='input_name'
+                    />
                 </div>
                 <div className='input-group'>
                     <p className='description'>이메일</p>
                     <input type="text" value={userInfo.email} readOnly disabled id='input_email' />
                 </div>
-                <button id='delete_account'>회원탈퇴</button>
+                <button id='delete_account' onClick={handleDeleteAccount}>회원탈퇴</button>
                 <div id='button_group'>
-                    <button id='go_back'>로그아웃</button>
-                    <button id='save'>저장</button>
+                    <button id='go_back' onClick={handleLogout}>로그아웃</button>
+                    <button id='save' onClick={handleSave} disabled={!isSaveEnabled}>저장</button>
                 </div>
             </div>
         </div>
