@@ -1,0 +1,54 @@
+/* src/styles/login.css */
+
+.container {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 150px;
+}
+
+.heading {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: #696969;
+}
+
+#line-left, #line-right {
+    flex: 1;
+    height: 1px;
+    background-color: #696969;
+    margin: 0 12px;
+    width: 307px;
+
+}
+
+.loginLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    align-items: center;
+    padding-top: 47px;
+}
+
+.loginImage {
+    width: 200px;  /* 이미지 너비 조정 */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.loginImage:hover {
+    transform: scale(1.1);
+}
