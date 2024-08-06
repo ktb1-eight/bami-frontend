@@ -41,13 +41,24 @@ const RestaurantList = ({ setCity }) => {
         <div className="restaurant-container">
             <div className="restaurant-grid">
                 {restaurants.map((restaurant, index) => (
-                    <div key={index} className="restaurant-card" onClick={() => window.open(restaurant.placeURL, "_blank")}>
+                    <div
+                        key={index}
+                        className="restaurant-card"
+                        onClick={() => window.open(restaurant.placeURL, "_blank")}
+                        style={{
+                            backgroundImage: `url(${restaurant.imageURL})`,
+                        }}
+                    >
                         <div className="restaurant-info">
                             <h2>{restaurant.name}</h2>
-                            <p>주소 : {restaurant.address}</p>
-                            <p>카테고리 : {restaurant.category}</p>
-                            <p>거리 : {restaurant.distance} m</p>
-                            <p>전화번호 : {restaurant.phone}</p>
+                            <p>{restaurant.category}</p>
+                            <p>{(restaurant.distance / 1000).toFixed(1)}km</p>
+                            <p>영업중</p>
+                            <div className="restaurant-rating">
+                                <span>{restaurant.rating.toFixed(1)}</span>
+                                <span>★</span>
+                                <span>{restaurant.userRatingsTotal}건</span>
+                            </div>
                         </div>
                     </div>
                 ))}

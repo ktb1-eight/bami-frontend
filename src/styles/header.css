@@ -3,13 +3,18 @@ header {
     justify-content: space-between;
     align-items: center; 
     padding: 10px 30px; 
-    background-color: #f8f9fa;
+    background-color: #fafafa;
   }
   
   header .logo {
     font-weight: bold;
-    width: 34px;
-    height: 33.27px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .user{
+    height: 40px;
   }
   
   header nav {
@@ -20,7 +25,9 @@ header {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 20px;
+    gap: 60px;
+    margin-right: 100px;
+    font-size: large;
   }
   
   header nav ul li {
