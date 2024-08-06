@@ -1,7 +1,8 @@
 // src/components/Header.js
 
 import React, { useState, useEffect } from 'react';
-import image from '../images/image.png';
+import image from '../images/logo.png';
+import basic_profile from "../images/profile.png";
 import "../styles/header.css"
 
 const Header = () => {
@@ -59,7 +60,7 @@ const Header = () => {
             <img src={userImage} alt={userImage} className="profile-image" />
           </a>
         ) : (
-          <a className="profile" href="/login">로그인</a>
+          <a className="profile" href="/login"><img src={basic_profile} alt={basic_profile} id='basic_profile'/></a>
         )}
     </header>
   );

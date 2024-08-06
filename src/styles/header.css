@@ -8,11 +8,9 @@ header {
   
   header .logo {
     font-weight: bold;
-    height: 40px;
-    margin-top: 10px;
-    margin-left: 10px;
+    width: 34px;
+    height: 33.27px;
   }
-
   .user{
     height: 40px;
   }
@@ -55,4 +53,8 @@ header {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  #basic_profile {
+    width: 37.65px;
   }
