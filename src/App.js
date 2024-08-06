@@ -1,14 +1,9 @@
-// src/App.js
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainScreen from './components/MainScreen';
 import Login from './views/login';
 import Profile from './views/profile';
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -36,7 +31,7 @@ function App() {
     return <div>Error: {error}</div>;
   }
 
-  if(!config) {
+  if (!config) {
     return <div>로딩중...</div>;
   }
 
@@ -46,7 +41,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login config={config} />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={<MainScreen config={config} />} />
+          <Route path="/" element={<MainScreen />} />
         </Routes>
       </div>
     </Router>

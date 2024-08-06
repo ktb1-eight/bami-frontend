@@ -22,7 +22,7 @@ main {
   align-items: flex-start;
   margin-top: 120px;
   background: linear-gradient(to right, #e1eef7, #ade6fa);
-  padding: 60px 40px;
+  padding: 60px 80px;
   border-radius: 10px; 
   width: 100vw;
   box-sizing: border-box; 
@@ -59,7 +59,7 @@ main {
 
 .content {
   display: flex;
-  gap: 40px;
+  gap: 200px;
   margin: 50px 40px;
 }
 
@@ -72,16 +72,17 @@ main {
 
 .weather-section, .travel-section, .restaurant-section {
   background-color: white;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
 }
 
 .weather-section h2, .travel-section h2, .restaurant-section h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  margin-left: 10px;
+  text-align: left;
 }
 
 .weather-section > div, .travel-section > div, .restaurant-section > div {
   display: flex;
-  align-items: center;
 }

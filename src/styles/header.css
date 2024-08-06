@@ -3,27 +3,18 @@ header {
     justify-content: space-between;
     align-items: center; 
     padding: 10px 30px; 
-    background-color: #ffffff;
-    border-style:double;
-    border-color: #e0e0e0;
+    background-color: #fafafa;
   }
   
   header .logo {
     font-weight: bold;
-<<<<<<< HEAD
-    width: 34px;
-    height: 33.27px;
-=======
     height: 40px;
     margin-top: 10px;
     margin-left: 10px;
   }
 
   .user{
-    margin-left: 120px;
     height: 40px;
-
->>>>>>> bc546ee ([Feat] 식당 정보에 사진, 평점, 리뷰 수 추가 및 UI 업데이트)
   }
   
   header nav {
@@ -34,8 +25,8 @@ header {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 80px;
-    margin-right: 25px;
+    gap: 60px;
+    margin-right: 100px;
     font-size: large;
   }
   
@@ -47,7 +38,6 @@ header {
     text-decoration: none;
     color: black;
     font-weight: bold;
-<<<<<<< HEAD
   }
   
   header .profile {
@@ -65,6 +55,4 @@ header {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-=======
->>>>>>> bc546ee ([Feat] 식당 정보에 사진, 평점, 리뷰 수 추가 및 UI 업데이트)
   }

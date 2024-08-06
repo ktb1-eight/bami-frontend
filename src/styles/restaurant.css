@@ -16,7 +16,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    width: calc(33% - 20px); /* 3열 레이아웃 */
+    width: calc(33% - 15px); /* 3열 레이아웃 */
     height: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;

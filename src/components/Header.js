@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 // src/components/Header.js
 
 import React, { useState, useEffect } from 'react';
-=======
-import React from 'react';
-import { Link } from 'react-router-dom';
->>>>>>> bc546ee ([Feat] 식당 정보에 사진, 평점, 리뷰 수 추가 및 UI 업데이트)
 import image from '../images/image.png';
-import user from '../images/user.png';
-import "../styles/header.css";
+import "../styles/header.css"
 
 const Header = () => {
   const [userName, setUserName] = useState(null);
@@ -48,7 +42,6 @@ const Header = () => {
 
   return (
     <header>
-<<<<<<< HEAD
       <a href="/">
         <img className="logo" src={image} alt="Logo" />
       </a>
@@ -68,22 +61,6 @@ const Header = () => {
         ) : (
           <a className="profile" href="/login">로그인</a>
         )}
-=======
-      <Link to="/">
-        <img className="logo" src={image} alt="Logo" />
-      </Link>
-      <nav>
-        <ul>
-          <li><a href="#how-to-use">이용 방법</a></li>
-          <li><a href="#long-term">장기 여행지 추천</a></li>
-          <li><a href="#short-term">단기 일정 추천</a></li>
-          <li><a href="#my-travel">내 여행</a></li>
-          <li><a href="#support">고객 지원</a></li>
-        </ul>
-      </nav>
-      <img className="user" src={user} alt="User" />
-      {/* <a href="https://kr.freepik.com/author/freepik/icons/basic-rounded-lineal_4#from_element=families_block">Freepik 제작 아이콘</a> */}
->>>>>>> bc546ee ([Feat] 식당 정보에 사진, 평점, 리뷰 수 추가 및 UI 업데이트)
     </header>
   );
 };
