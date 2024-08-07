@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainScreen from './components/MainScreen';
+import ShortTermMap from './components/ShortTermMap';
 import Login from './views/login';
 import Profile from './views/profile';
 import './App.css';
@@ -42,6 +43,7 @@ function App() {
           <Route path="/login" element={<Login config={config} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<MainScreen />} />
+          <Route path="/short-term" element={<ShortTermMap />} />
         </Routes>
       </div>
     </Router>

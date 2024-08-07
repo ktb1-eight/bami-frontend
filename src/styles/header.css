@@ -2,19 +2,19 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    padding: 10px 30px; 
+    padding: 2px 20px; 
     background-color: #fafafa;
   }
   
   header .logo {
     font-weight: bold;
-    height: 40px;
+    height: 30px;
     margin-top: 10px;
     margin-left: 10px;
   }
 
   .user{
-    height: 40px;
+    height: 30px;
   }
   
   header nav {
@@ -52,7 +52,7 @@ header {
   
   .profile-image {
     width: 40px;
-    height: 40px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
   }
