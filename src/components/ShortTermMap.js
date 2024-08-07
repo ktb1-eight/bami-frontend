@@ -8,16 +8,17 @@ const ShortTermMap = () => {
   const [map, setMap] = useState(null);
   const [infowindow, setInfowindow] = useState(null);
   const [markers, setMarkers] = useState([]);
+  const [inputText, setInputText] = useState("");
 
   useEffect(() => {
     const mapContainer = document.getElementById('map');
 
     const initializeMap = async () => {
       const latitude = 37.566826;
-      const longitude = 126.9786567; 
+      const longitude = 126.9786567;
       const mapOption = {
         center: new kakao.maps.LatLng(latitude, longitude),
-        level: 3 
+        level: 3
       };
 
       const map = new kakao.maps.Map(mapContainer, mapOption);
@@ -26,15 +27,16 @@ const ShortTermMap = () => {
 
       const marker = new kakao.maps.Marker({
         position: new kakao.maps.LatLng(latitude, longitude)
-      })
-      marker.setMap(map)
+      });
+      marker.setMap(map);
       setMap(map);
       setInfowindow(infowindow);
+
       kakao.maps.event.addListener(marker, 'mouseover', () => {
         infowindow.setContent(`<div style="padding:5px;font-size:12px;"> 서울 시청 </div>`);
         infowindow.open(map, marker);
       });
-  
+
       kakao.maps.event.addListener(marker, 'mouseout', () => {
         infowindow.close();
       });
@@ -82,7 +84,7 @@ const ShortTermMap = () => {
       infowindow.setContent(`<div style="padding:5px;font-size:12px;">${place.place_name}</div>`);
       infowindow.open(map, marker);
     });
-    
+
     kakao.maps.event.addListener(marker, 'mouseout', () => {
       infowindow.close();
     });
@@ -95,6 +97,16 @@ const ShortTermMap = () => {
     setMarkers([]);
   };
 
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -103,11 +115,14 @@ const ShortTermMap = () => {
         <input
           type="text"
           id="searchInput"
+          value={inputText}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
         />
         <button onClick={handleSearch}></button>
       </div>
       <hr id="horizontal-line"></hr>
-      <div id="map" style={{ width: '100%', height: '500px'}}>
+      <div id="map" style={{ width: '100%', height: '500px' }}>
       </div>
     </div>
   );

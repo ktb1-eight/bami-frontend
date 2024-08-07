@@ -37,7 +37,7 @@ header {
   header nav ul li a {
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    font-weight: 400;
   }
   
   header .profile {
@@ -52,7 +52,11 @@ header {
   
   .profile-image {
     width: 40px;
-    height: 30px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  #basic_profile {
+    width: 37.65px;
   }

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import image from '../images/image.png';
+import profile from "../images/profile.png";
 import { Link } from 'react-router-dom';
 import "../styles/header.css"
 
@@ -60,7 +61,7 @@ const Header = () => {
             <img src={userImage} alt={userImage} className="profile-image" />
           </a>
         ) : (
-          <a className="profile" href="/login">로그인</a>
+          <a className="profile" href="/login"><img src={profile} alt={profile} id='basic_profile'/></a>
         )}
     </header>
   );
