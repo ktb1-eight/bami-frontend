@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // axios를 임포트합니다.
 import '../styles/shortTravelPlanner.css';
 import Header from './Header';
 import PreferenceSelector from './PreferenceSelector';
@@ -25,6 +26,9 @@ const ShortTravelPlanner = () => {
 
     const handleSubmit = () => {
         if (!selectedCompanion || !selectedTransport || !Object.values(selectedPreferences).every(Boolean)) {
+            console.log(selectedCompanion)
+            console.log(selectedTransport)
+            console.log(selectedPreferences)
             alert('모든 필드를 선택해주세요!');
             if (!selectedCompanion) companionRef.current.scrollIntoView({ behavior: 'smooth' });
             else if (!selectedTransport) transportRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -39,22 +43,14 @@ const ShortTravelPlanner = () => {
             location: location.state // 마커의 위치 정보 포함
         };
 
-        // 백엔드로 데이터 전송
-        fetch('/api/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('성공:', data);
-            navigate('/');
-        })
-        .catch(error => {
-            console.error('오류:', error);
-        });
+        axios.post('/api/submit', data)
+            .then(response => {
+                console.log('성공:', response.data);
+                navigate('/'); // 성공적으로 제출된 후 홈 페이지로 이동
+            })
+            .catch(error => {
+                console.error('오류:', error);
+            });
     };
 
     const handleCompanionClick = (companion) => {

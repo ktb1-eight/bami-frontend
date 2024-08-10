@@ -8,7 +8,7 @@ const RestaurantList = ({ setCity }) => {
     useEffect(() => {
         const fetchRestaurants = async (latitude, longitude) => {
             try {
-                const response = await axios.get('http://localhost:8080/api/restaurant', {
+                const response = await axios.get('/api/restaurant', {
                     params: {
                         nx: latitude,
                         ny: longitude

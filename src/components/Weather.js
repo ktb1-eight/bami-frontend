@@ -8,7 +8,7 @@ const Weather = () => {
     useEffect(() => {
         const fetchWeather = async (latitude, longitude) => {
             try {
-                const response = await axios.get('http://localhost:8080/api/weather', {
+                const response = await axios.get('/api/weather', {
                     params: {
                         nx: latitude,
                         ny: longitude
