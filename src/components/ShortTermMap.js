@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/shortTermMap.css';
 import Header from './Header';
 
@@ -9,6 +10,7 @@ const ShortTermMap = () => {
   const [infowindow, setInfowindow] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [inputText, setInputText] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const mapContainer = document.getElementById('map');
@@ -32,6 +34,10 @@ const ShortTermMap = () => {
       setMap(map);
       setInfowindow(infowindow);
 
+      kakao.maps.event.addListener(marker, 'click', () => {
+        navigate('/travel-planner', { state: { latitude, longitude } });
+      });
+
       kakao.maps.event.addListener(marker, 'mouseover', () => {
         infowindow.setContent(`<div style="padding:5px;font-size:12px;"> 서울 시청 </div>`);
         infowindow.open(map, marker);
@@ -43,7 +49,7 @@ const ShortTermMap = () => {
     };
 
     initializeMap();
-  }, []);
+  }, [navigate]);
 
   const handleSearch = () => {
     const keyword = document.getElementById('searchInput').value;
@@ -78,6 +84,10 @@ const ShortTermMap = () => {
     const marker = new kakao.maps.Marker({
       map: map,
       position: new kakao.maps.LatLng(place.y, place.x)
+    });
+
+    kakao.maps.event.addListener(marker, 'click', () => {
+      navigate('/travel-planner', { state: { latitude: place.y, longitude: place.x } });
     });
 
     kakao.maps.event.addListener(marker, 'mouseover', () => {
@@ -122,7 +132,7 @@ const ShortTermMap = () => {
         <button onClick={handleSearch}></button>
       </div>
       <hr id="horizontal-line"></hr>
-      <div id="map" style={{ width: '100%', height: '500px' }}>
+      <div id="map" style={{ width: '100%', height: '660px' }}>
       </div>
     </div>
   );

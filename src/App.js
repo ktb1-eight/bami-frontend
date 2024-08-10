@@ -5,6 +5,7 @@ import ShortTermMap from './components/ShortTermMap';
 import Login from './views/login';
 import Profile from './views/profile';
 import './App.css';
+import ShortTravelPlanner from './components/ShortTravelPlanner';
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<MainScreen />} />
           <Route path="/short-term" element={<ShortTermMap />} />
+          <Route path="/travel-planner" element={<ShortTravelPlanner />} />
         </Routes>
       </div>
     </Router>
