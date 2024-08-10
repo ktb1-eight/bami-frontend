@@ -60,20 +60,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap:30px;
     width: 100%;
     padding: 20px;
   }
 
   .preference span.left-name,
   .preference span.right-name {
-    font-size: 18px;
+    font-size: 30px;
     flex-shrink: 0;
   }
   
   
   .preference span {
     flex-shrink: 0;
-    margin-bottom: 20px;
   }
   
   .preference button {
@@ -165,12 +165,12 @@
 }
 
 .left-name {
-  color: #b4d6fb;
+  color: #86bcf5;
   width: 200px;
 }
 
 .right-name {
-  color: #f6b3ff;
+  color: #ed80fb;
   width: 200px;
 }
 

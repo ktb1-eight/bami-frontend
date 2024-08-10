@@ -6,6 +6,7 @@ import Login from './views/login';
 import Profile from './views/profile';
 import './App.css';
 import ShortTravelPlanner from './components/ShortTravelPlanner';
+import GenderAgeSelector from './components/GenderAgeSelector';
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -46,6 +47,7 @@ function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="/short-term" element={<ShortTermMap />} />
           <Route path="/travel-planner" element={<ShortTravelPlanner />} />
+          <Route path="/travel-selectInfo" element={<GenderAgeSelector />} />
         </Routes>
       </div>
     </Router>

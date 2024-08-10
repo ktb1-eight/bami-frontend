@@ -35,7 +35,7 @@ const ShortTermMap = () => {
       setInfowindow(infowindow);
 
       kakao.maps.event.addListener(marker, 'click', () => {
-        navigate('/travel-planner', { state: { latitude, longitude } });
+        navigate('/travel-selectInfo', { state: { latitude, longitude } });
       });
 
       kakao.maps.event.addListener(marker, 'mouseover', () => {
@@ -87,7 +87,7 @@ const ShortTermMap = () => {
     });
 
     kakao.maps.event.addListener(marker, 'click', () => {
-      navigate('/travel-planner', { state: { latitude: place.y, longitude: place.x } });
+      navigate('/travel-selectInfo', { state: { latitude: place.y, longitude: place.x } });
     });
 
     kakao.maps.event.addListener(marker, 'mouseover', () => {
@@ -127,7 +127,7 @@ const ShortTermMap = () => {
           id="searchInput"
           value={inputText}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <button onClick={handleSearch}></button>
       </div>

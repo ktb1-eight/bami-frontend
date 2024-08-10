@@ -1,0 +1,114 @@
+.container {
+    text-align: center;
+    margin: 20px auto;
+    width: 80%;
+}
+
+#description{
+    margin-top: -30px;
+}
+
+.gender-selection {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin: 30px 0;
+}
+
+.gender-card {
+    background-color: #e0e0e0;
+    border-radius: 100%;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.gender-card.selected {
+    border: 1px solid #676161;
+    border-radius: 50%;
+}
+
+.gender-icon.female {
+    width: 120px;
+    height:70px;
+    background-image: url('../images/female.png'); /* 여성 아이콘 이미지 경로 */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gender-icon.male {
+    width: 120px;
+    height:70px;
+    background-image: url('../images/male.png'); /* 남성 아이콘 이미지 경로 */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.button-group {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    margin-bottom: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.column button {
+    text-align: center;
+    height: 45px;
+    width: 120px;
+    font-size: 15px;
+    border: 2px solid #000000;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.column button.selected {
+    background-color: #676161;
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 170px;
+    margin-top: 20px;
+}
+
+.next-button, .apply-button {
+    height: 45px;
+    width: 120px;
+    font-size: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.next-button {
+    background-color: #676161;
+    color: white;
+}
+
+.apply-button {
+    background-color: #a4c9f2;
+    color: white;
+}
+
+.apply-button.disabled {
+    background-color: #a4c9f2;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.apply-button.enabled {
+    background-color: #3b82f6;
+    opacity: 1;
+    cursor: pointer;
+}

@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // axios를 임포트합니다.
+import axios from 'axios';
 import '../styles/shortTravelPlanner.css';
 import Header from './Header';
 import PreferenceSelector from './PreferenceSelector';
@@ -19,16 +19,22 @@ const ShortTravelPlanner = () => {
         planning: '',
         photography: '',
     });
+    const [gender, setGender] = useState('');
+    const [ageGroup, setAgeGroup] = useState('');
 
     const companionRef = useRef(null);
     const transportRef = useRef(null);
     const preferencesRef = useRef(null);
 
+    useEffect(() => {
+        if (location.state) {
+            setGender(location.state.gender || '');
+            setAgeGroup(location.state.ageGroup || '');
+        }
+    }, [location.state]);
+
     const handleSubmit = () => {
         if (!selectedCompanion || !selectedTransport || !Object.values(selectedPreferences).every(Boolean)) {
-            console.log(selectedCompanion)
-            console.log(selectedTransport)
-            console.log(selectedPreferences)
             alert('모든 필드를 선택해주세요!');
             if (!selectedCompanion) companionRef.current.scrollIntoView({ behavior: 'smooth' });
             else if (!selectedTransport) transportRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -40,6 +46,8 @@ const ShortTravelPlanner = () => {
             companion: selectedCompanion,
             transport: selectedTransport,
             preferences: selectedPreferences,
+            gender: gender,
+            ageGroup: ageGroup,
             location: location.state // 마커의 위치 정보 포함
         };
 
@@ -67,6 +75,7 @@ const ShortTravelPlanner = () => {
             [category]: prev[category] === value ? '' : value,
         }));
     };
+
 
     return (
         <div>
