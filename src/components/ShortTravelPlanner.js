@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/shortTravelPlanner.css';
 import Header from './Header';
+import PreferenceSelector from './PreferenceSelector';
 
 const ShortTravelPlanner = () => {
     const location = useLocation();
@@ -23,7 +24,7 @@ const ShortTravelPlanner = () => {
     const preferencesRef = useRef(null);
 
     const handleSubmit = () => {
-        if (!selectedCompanion || !selectedTransport || !selectedPreferences.nature || !selectedPreferences.duration || !selectedPreferences.newPlaces || !selectedPreferences.relaxation || !selectedPreferences.exploration || !selectedPreferences.planning || !selectedPreferences.photography) {
+        if (!selectedCompanion || !selectedTransport || !Object.values(selectedPreferences).every(Boolean)) {
             alert('모든 필드를 선택해주세요!');
             if (!selectedCompanion) companionRef.current.scrollIntoView({ behavior: 'smooth' });
             else if (!selectedTransport) transportRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -49,7 +50,6 @@ const ShortTravelPlanner = () => {
         .then(response => response.json())
         .then(data => {
             console.log('성공:', data);
-            // 성공적으로 제출된 후 필요한 작업을 여기에 추가
             navigate('/');
         })
         .catch(error => {
@@ -108,89 +108,61 @@ const ShortTravelPlanner = () => {
             <div ref={preferencesRef}>
               <h3>여행 선호도를 선택해주세요.</h3>
               <div className="preference-group">
-                <div className="preference">
-                  <span className="left-name">자연</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('nature', value)}
-                      className={`${selectedPreferences.nature === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">도심</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">숙박</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('duration', value)}
-                      className={`${selectedPreferences.duration === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">당일</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">새로운 지역</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('newPlaces', value)}
-                      className={`${selectedPreferences.newPlaces === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">익숙한 지역</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">휴양, 휴식</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('relaxation', value)}
-                      className={`${selectedPreferences.relaxation === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">체험활동</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">잘 알려지지 않은 방문지</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('exploration', value)}
-                      className={`${selectedPreferences.exploration === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">알려진 방문지</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">계획에 따른 여행</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('planning', value)}
-                      className={`${selectedPreferences.planning === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">상황에 따른 여행</span>
-                </div>
-                <div className="preference">
-                  <span className="left-name">사진 촬영 중요하지 않음</span>
-                  {['1', '2', '3', '4', '5', '6', '7'].map((value, index) => (
-                    <button
-                      key={value}
-                      onClick={() => handlePreferenceClick('photography', value)}
-                      className={`${selectedPreferences.photography === value ? 'selected' : ''} size-${index + 1}`}
-                    />
-                  ))}
-                  <span className="right-name">사진 촬영 중요</span>
-                </div>
+                <PreferenceSelector
+                  category="nature"
+                  leftLabel="자연"
+                  rightLabel="도심"
+                  selectedValue={selectedPreferences.nature}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="duration"
+                  leftLabel="숙박"
+                  rightLabel="당일"
+                  selectedValue={selectedPreferences.duration}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="newPlaces"
+                  leftLabel="새로운 지역"
+                  rightLabel="익숙한 지역"
+                  selectedValue={selectedPreferences.newPlaces}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="relaxation"
+                  leftLabel="휴양, 휴식"
+                  rightLabel="체험활동"
+                  selectedValue={selectedPreferences.relaxation}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="exploration"
+                  leftLabel="잘 알려지지 않은 방문지"
+                  rightLabel="알려진 방문지"
+                  selectedValue={selectedPreferences.exploration}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="planning"
+                  leftLabel="계획에 따른 여행"
+                  rightLabel="상황에 따른 여행"
+                  selectedValue={selectedPreferences.planning}
+                  onClick={handlePreferenceClick}
+                />
+                <PreferenceSelector
+                  category="photography"
+                  leftLabel="사진 촬영 중요하지 않음"
+                  rightLabel="사진 촬영 중요"
+                  selectedValue={selectedPreferences.photography}
+                  onClick={handlePreferenceClick}
+                />
               </div>
             </div>
             <button onClick={handleSubmit} className="submit-button">제출</button>
           </div>
         </div>
       );
-    };
+};
 
 export default ShortTravelPlanner;
