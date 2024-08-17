@@ -87,12 +87,9 @@ const LongTrip = () => {
     };
 
     const handleDateChange = (update) => {
-      if (startDate && endDate && startDate.getTime() === update[0]?.getTime() && endDate.getTime() === update[1]?.getTime()) {
-        // 동일한 날짜가 선택되었을 때 선택 해제
-        setDateRange([null, null]);
-    } else {
-        setDateRange(update);
-    }
+      setDateRange(update);
+      setStartDate(update[0]);
+      setEndDate(update[1]);
     };
 
 
