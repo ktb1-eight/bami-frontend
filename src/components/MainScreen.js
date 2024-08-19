@@ -9,6 +9,10 @@ import Header from './Header';
 const MainScreen = () => {
   const [city, setCity] = useState();
 
+  const goLongTrip = () => {
+    window.location.href = "/longTrip";
+  };
+
   return (
     <div className="main-screen">
       <Header />
@@ -16,7 +20,7 @@ const MainScreen = () => {
         <div className="intro">
           <h1>한달살이에 특화된<div>새로운 여행 플래너</div></h1>
           <p>AI가 도와주는 Bami와 함께 빠르게 스케줄링 해보세요</p>
-          <button id = "startButton">여행지 추천</button>
+          <button id = "startButton" onClick={goLongTrip}>여행지 추천</button>
         </div>
         <div className="content">
           <div className="left-section">

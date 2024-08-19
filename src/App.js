@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainScreen from './components/MainScreen';
 import Login from './views/login';
 import Profile from './views/profile';
+import LongTrip from './views/longTrip';
+import LongRecommendationResult from './views/longRecommendationResult';
 import './App.css';
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/longstays/recommendations" element={<LongRecommendationResult />} />
+          <Route path="/longTrip" element={<LongTrip />} />
           <Route path="/login" element={<Login config={config} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<MainScreen />} />

@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "Bold";
+  src: url("./fonts/SpoqaHanSansNeo-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Light";
+  src: url("./fonts/SpoqaHanSansNeo-Light.ttf");
+}
+
+@font-face {
+  font-family: "Medium";
+  src: url("./fonts/SpoqaHanSansNeo-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Regular";
+  src: url("./fonts/SpoqaHanSansNeo-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Thin";
+  src: url("./fonts/SpoqaHanSansNeo-Thin.ttf");
+}
