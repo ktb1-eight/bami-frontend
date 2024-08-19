@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { convert as romanize } from 'hangul-romanization'; // 'convert' 함수를 'romanize'로 사용
 import '../styles/longRecommendationResult.css';
+import CityModal from '../components/CityModal';
+import ConfirmModal from '../components/ConfirmModal';
 
 const fetchImages = async (query) => {
     try {
@@ -15,17 +17,30 @@ const fetchImages = async (query) => {
     }
 };
 
+const fetchDescription = async (cityName) => {
+    try {
+        const response = await axios.get(`/api/city-description/${cityName}`);
+        return response.data;
+    } catch(e) {
+        console.error("Error fetching city description:", e);
+        return "설명을 불러오는 중 오류가 발생했습니다.";
+    }
+};
+
 const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 const LongRecommendationResult = () => {
     const [cities, setCities] = useState([]);
+    const [modalOepn, setModalOpen] = useState(false);
+    const [confirmModalOepn, setConfirmModalOpen] = useState(false);
+    const [selectedCity, setSelectedCity] = useState(null); 
 
     const getCityNames = () => {
         return [
             { name: '서울특별시' },
-            { name: '제주' },
+            { name: '제주특별자치도' },
             { name: '수원' },
             { name: '대구광역시' },
             { name: '대관령' },
@@ -37,6 +52,7 @@ const LongRecommendationResult = () => {
 
     const removeCitySuffix = (cityName) => {
         return cityName
+            .replace('특별자치도', '')
             .replace('특별시', '')
             .replace('광역시', '')
             .replace('시', '')
@@ -46,22 +62,23 @@ const LongRecommendationResult = () => {
     useEffect(() => {
         const cityNames = getCityNames();
 
-        const fetchCityImages = async () => {
+        const fetchCity = async () => {
             const updatedCities = await Promise.all(cityNames.map(async (city) => {
                 try {
                     const imageUrls = await fetchImages(city.name + " 풍경"); // 이미지 URL 배열 가져오기
                     const displayName = removeCitySuffix(city.name); // 화면에 표시할 때의 이름 변환
                     const englishName = capitalizeFirstLetter(romanize(displayName)); // 한글 이름을 로마자로 변환
-                    return { ...city, name: displayName, englishName, imageUrls, currentImageIndex: 0 }; // 변환된 이름 사용
+                    const description = await fetchDescription(city.name);
+                    return { ...city, displayName: displayName, englishName, description, imageUrls, currentImageIndex: 0 }; // 변환된 이름 사용
                 } catch (error) {
                     console.error(`Error fetching images for ${city.name}`, error);
-                    return { ...city, name: removeCitySuffix(city.name), englishName: capitalizeFirstLetter(romanize(removeCitySuffix(city.name))), imageUrls: [], currentImageIndex: 0 };
+                    return { ...city, displayName: removeCitySuffix(city.name), englishName: capitalizeFirstLetter(romanize(removeCitySuffix(city.name))), description: "", imageUrls: [], currentImageIndex: 0 };
                 }
             }));
             setCities(updatedCities);
         };
 
-        fetchCityImages();
+        fetchCity();
     }, []);
 
     const handleImageError = (cityIndex) => {
@@ -75,6 +92,22 @@ const LongRecommendationResult = () => {
         });
     };
 
+    const openModal = (city) => {
+        setSelectedCity(city);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+        setConfirmModalOpen(true);
+        // DB 저장
+    };
+
+    const closeConfirmModal = () => {
+        setConfirmModalOpen(false);
+        setSelectedCity(null);
+    }
+
     return (
         <div className="container">
             <Header />
@@ -82,7 +115,7 @@ const LongRecommendationResult = () => {
             <p id='headline2'>이미지 위로 커서를 올리면 정보를 알 수 있어요</p>
             <ul className="grid">
                 {cities.map((city, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => openModal(city)}>
                         {city.imageUrls.length > 0 ? (
                             <img
                                 src={city.imageUrls[city.currentImageIndex]}
@@ -93,10 +126,13 @@ const LongRecommendationResult = () => {
                             <p>이미지를 불러올 수 없습니다.</p>
                         )}
                         <p id='englishName'>{city.englishName}</p>
-                        <p id='koreanName'>{city.name}</p>
+                        <p id='koreanName'>{city.displayName}</p>
                     </li>
                 ))}
             </ul>
+
+            <CityModal isOpen={modalOepn} onClose={closeModal} city={selectedCity}/>
+            {confirmModalOepn && <ConfirmModal isOpen={confirmModalOepn} onClose={closeConfirmModal} cityName={selectedCity.displayName}/>}
         </div>
     );
 }
