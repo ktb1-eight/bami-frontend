@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Header from '../components/Header';
 import axios from 'axios';
 import { convert as romanize } from 'hangul-romanization'; // 'convert' 함수를 'romanize'로 사용
@@ -36,6 +38,13 @@ const LongRecommendationResult = () => {
     const [modalOepn, setModalOpen] = useState(false);
     const [confirmModalOepn, setConfirmModalOpen] = useState(false);
     const [selectedCity, setSelectedCity] = useState(null); 
+    const location = useLocation();
+
+    const queryParams = new URLSearchParams(location.search);
+    const userId = queryParams.get('id');
+    const startDate = queryParams.get('startDate');
+    const endDate = queryParams.get('endDate');
+
 
     const getCityNames = () => {
         return [
@@ -97,10 +106,24 @@ const LongRecommendationResult = () => {
         setModalOpen(true);
     };
 
-    const closeModal = () => {
+    const closeModal = async (city) => {
+        // DB 저장
+        if(userId !== '' || userId != null) {
+            try {
+                const response = await axios.post("/api/save-destination", {
+                    'userId': userId,
+                    'location': city.displayName,
+                    'startDate': startDate,
+                    'endDate': endDate,
+                    'visited': false
+                });
+                console.log("DB 저장 성공:", response.data);
+            } catch (error) {
+                console.error("DB 저장 실패:", error);
+            }
+        }
         setModalOpen(false);
         setConfirmModalOpen(true);
-        // DB 저장
     };
 
     const closeConfirmModal = () => {
