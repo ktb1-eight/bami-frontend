@@ -6,6 +6,7 @@ import Profile from './views/profile';
 import LongTrip from './views/longTrip';
 import LongRecommendationResult from './views/longRecommendationResult';
 import './App.css';
+import MyTravel from './views/myTravel';
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -41,6 +42,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path='/myTravel' element={<MyTravel/>}/>
           <Route path="/longstays/recommendations" element={<LongRecommendationResult />} />
           <Route path="/longTrip" element={<LongTrip />} />
           <Route path="/login" element={<Login config={config} />} />
