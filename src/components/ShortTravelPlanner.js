@@ -81,10 +81,10 @@ const ShortTravelPlanner = () => {
         <div>
           <Header />
           <div className="form-container">
-            <h2>Bami님에게 맞춤 여행을 추천해주기 전 몇가지를 알려주세요!</h2>
+            <span className='title'>Bami님에게 맞춤 여행을 추천해주기 전 몇가지를 알려주세요!</span>
             <div className="companion" ref={companionRef}>
-              <h3>동행인이 있으면 선택해주세요.</h3>
-              <div className="button-group">
+              <span className='question'>동행인이 있으면 선택해주세요.</span>
+              <div className="companion-button-group">
                 {['혼자', '가족과', '연인과', '친구와', '반려동물과'].map((companion) => (
                   <button
                     key={companion}
@@ -97,8 +97,8 @@ const ShortTravelPlanner = () => {
               </div>
             </div>
             <div ref={transportRef}>
-              <h3>이동수단을 선택해주세요.</h3>
-              <div className="button-group">
+              <span className='question'>이동수단을 선택해주세요.</span>
+              <div className="transport-button-group">
                 {['차량 이용', '대중교통'].map((transport) => (
                   <button
                     key={transport}
@@ -111,7 +111,7 @@ const ShortTravelPlanner = () => {
               </div>
             </div>
             <div ref={preferencesRef}>
-              <h3>여행 선호도를 선택해주세요.</h3>
+              <span className='question'>선호하는 장소 타입</span>
               <div className="preference-group">
                 <PreferenceSelector
                   category="nature"

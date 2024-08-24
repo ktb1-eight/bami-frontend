@@ -50,7 +50,7 @@ const GenderAgeSelector = () => {
         <div>
             <Header />
             <div className="container">
-                <h2>성별/연령대를 알려주세요</h2>
+                <p id="title">성별/연령대를 알려주세요</p>
                 <p id="description">제공해주신 정보는 여행 추천에 사용됩니다.</p>
                 <div className="gender-selection">
                     <div 
@@ -69,28 +69,15 @@ const GenderAgeSelector = () => {
                     </div>
                 </div>
                 <div className="button-group">
-                    <div className="column">
-                        {['20대 미만', '30대', '50대'].map(ageGroup => (
-                            <button
-                                key={ageGroup}
-                                className={selectedAgeGroup === ageGroup ? 'selected' : ''}
-                                onClick={() => handleAgeGroupClick(ageGroup)}
-                            >
-                                {ageGroup}
-                            </button>
-                        ))}
-                    </div>
-                    <div className="column">
-                        {['20대', '40대', '60대 이상'].map(ageGroup => (
-                            <button
-                                key={ageGroup}
-                                className={selectedAgeGroup === ageGroup ? 'selected' : ''}
-                                onClick={() => handleAgeGroupClick(ageGroup)}
-                            >
-                                {ageGroup}
-                            </button>
-                        ))}
-                    </div>
+                    {['20대 미만', '20대', '30대', '40대', '50대', '60대 이상'].map(ageGroup => (
+                        <button
+                            key={ageGroup}
+                            className={selectedAgeGroup === ageGroup ? 'selected' : ''}
+                            onClick={() => handleAgeGroupClick(ageGroup)}
+                        >
+                            {ageGroup}
+                        </button>
+                    ))}
                 </div>
                 <div className="action-buttons">
                     <button className="next-button" onClick={handleNextClick}>이전으로</button>
