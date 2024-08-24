@@ -6,6 +6,36 @@
   text-align: center;
 }
 
+.purpose-question {
+  margin-top: 50px;
+}
+
+.purpose-button-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 0px 430px;
+  margin-top: 80px;
+}
+
+.purpose-button-group button {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Light";
+  padding: 15px 30px;
+  border: 2px solid #3A3A3A;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.purpose-button-group button.selected {
+  background-color: #87CEEB;
+  color: white;
+  font-family: "Regular";
+  border: #87CEEB;
+}
+
 .title{
   font-family: "Light";
   font-size: 32px;

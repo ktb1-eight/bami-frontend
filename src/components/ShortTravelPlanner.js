@@ -19,6 +19,7 @@ const ShortTravelPlanner = () => {
         planning: '',
         photography: '',
     });
+    const [selectedPurpose, setSelectedPurpose] = useState(''); // <-- Add this
     const [gender, setGender] = useState('');
     const [ageGroup, setAgeGroup] = useState('');
 
@@ -69,6 +70,10 @@ const ShortTravelPlanner = () => {
         setSelectedTransport(selectedTransport === transport ? '' : transport);
     };
 
+    const handlePurposeClick = (purpose) => { // <-- Add this function
+        setSelectedPurpose(selectedPurpose === purpose ? '' : purpose);
+    };
+
     const handlePreferenceClick = (category, value) => {
         setSelectedPreferences((prev) => ({
             ...prev,
@@ -76,16 +81,39 @@ const ShortTravelPlanner = () => {
         }));
     };
 
-
     return (
         <div>
           <Header />
           <div className="form-container">
             <span className='title'>Bami님에게 맞춤 여행을 추천해주기 전 몇가지를 알려주세요!</span>
+            <div className="purpose-question">
+              <span className='question'>여행의 목적을 선택해주세요!</span>
+              
+              <div className="purpose-button-group">
+                {['일상적인 환경 및 역할에서의 탈출, 지루함 탈피', 
+                  '쉴 수 있는 기회, 육체 피로 해결 및 정신적인 휴식', 
+                  '여행 동반자와의 친밀감 및 유대감 증진',
+                  '진정한 자아 찾기 또는 자신을 되돌아볼 기회 찾기', 
+                  'SNS 사진 등록 등 과시', 
+                  '운동, 건강 증진 및 충전', 
+                  '새로운 경험 추구', 
+                  '역사 탐방, 문화적 경험 등 교육적 동기', 
+                  '특별한 목적(칠순여행, 신혼여행, 수학여행, 인센티브여행)', 
+                  '기타'].map((purpose, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePurposeClick(purpose)}
+                      className={selectedPurpose === purpose ? 'selected' : ''}
+                    >
+                      {purpose}
+                    </button>
+                ))}
+              </div>
+            </div>
             <div className="companion" ref={companionRef}>
               <span className='question'>동행인이 있으면 선택해주세요.</span>
               <div className="companion-button-group">
-                {['혼자', '가족과', '연인과', '친구와', '반려동물과'].map((companion) => (
+                {['혼자', '가족과', '연인과', '친구와', '그 외'].map((companion) => (
                   <button
                     key={companion}
                     onClick={() => handleCompanionClick(companion)}
