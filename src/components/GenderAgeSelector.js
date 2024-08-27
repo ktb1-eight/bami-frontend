@@ -50,7 +50,7 @@ const GenderAgeSelector = () => {
         <div>
             <Header />
             <div className="container">
-                <p id="title">성별/연령대를 알려주세요</p>
+                <p id="genderAgeTitle">성별/연령대를 알려주세요</p>
                 <p id="description">제공해주신 정보는 여행 추천에 사용됩니다.</p>
                 <div className="gender-selection">
                     <div 

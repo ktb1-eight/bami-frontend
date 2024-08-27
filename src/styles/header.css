@@ -1,20 +1,19 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    padding: 2px 20px; 
-    background-color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 10px 30px; 
+  background-color: white;
+  border-bottom: 1px solid #E0E0E0;
   }
   
   header .logo {
     font-weight: bold;
-    height: 30px;
-    margin-top: 10px;
-    margin-left: 10px;
+    width: 34px;
+    height: 33.27px;
   }
-
   .user{
-    height: 30px;
+    height: 40px;
   }
   
   header nav {
@@ -37,7 +36,7 @@ header {
   header nav ul li a {
     text-decoration: none;
     color: black;
-    font-weight: 400;
+    font-weight: bold;
   }
   
   header .profile {
@@ -59,4 +58,4 @@ header {
 
   #basic_profile {
     width: 37.65px;
-  }
+  } 

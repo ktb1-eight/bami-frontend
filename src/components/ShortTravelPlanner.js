@@ -19,7 +19,7 @@ const ShortTravelPlanner = () => {
         planning: '',
         photography: '',
     });
-    const [selectedPurpose, setSelectedPurpose] = useState(''); // <-- Add this
+    const [selectedPurpose, setSelectedPurpose] = useState('');
     const [gender, setGender] = useState('');
     const [ageGroup, setAgeGroup] = useState('');
 
@@ -44,22 +44,31 @@ const ShortTravelPlanner = () => {
         }
 
         const data = {
-            companion: selectedCompanion,
-            transport: selectedTransport,
-            preferences: selectedPreferences,
-            gender: gender,
-            ageGroup: ageGroup,
-            location: location.state // 마커의 위치 정보 포함
-        };
-
-        axios.post('/api/submit', data)
-            .then(response => {
-                console.log('성공:', response.data);
-                navigate('/'); // 성공적으로 제출된 후 홈 페이지로 이동
-            })
-            .catch(error => {
-                console.error('오류:', error);
-            });
+          companion: selectedCompanion,
+          transport: selectedTransport,
+          preferences: selectedPreferences,
+          gender: gender,
+          ageGroup: ageGroup,
+          location: location.state,
+          travelPurpose: selectedPurpose
+      };
+  
+      axios.post('/api/submit', data)
+          .then(response => {
+              console.log('성공:', response.data);
+              navigate('/recommendation', { 
+                  state: { 
+                      recommendations: response.data,
+                      companion: selectedCompanion,
+                      transport: selectedTransport,
+                      preferences: selectedPreferences,
+                      purpose: selectedPurpose
+                  }
+              });
+          })
+          .catch(error => {
+              console.error('오류:', error);
+          });
     };
 
     const handleCompanionClick = (companion) => {
@@ -70,7 +79,7 @@ const ShortTravelPlanner = () => {
         setSelectedTransport(selectedTransport === transport ? '' : transport);
     };
 
-    const handlePurposeClick = (purpose) => { // <-- Add this function
+    const handlePurposeClick = (purpose) => {
         setSelectedPurpose(selectedPurpose === purpose ? '' : purpose);
     };
 

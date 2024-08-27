@@ -7,6 +7,7 @@ import Profile from './views/profile';
 import './App.css';
 import ShortTravelPlanner from './components/ShortTravelPlanner';
 import GenderAgeSelector from './components/GenderAgeSelector';
+import RecommendationPage from './components/RecommendationPage';
 
 function App() {
   const [config, setConfig] = useState(null);
@@ -48,6 +49,7 @@ function App() {
           <Route path="/short-term" element={<ShortTermMap />} />
           <Route path="/travel-planner" element={<ShortTravelPlanner />} />
           <Route path="/travel-selectInfo" element={<GenderAgeSelector />} />
+          <Route path="/recommendation" element={<RecommendationPage />} />
         </Routes>
       </div>
     </Router>
