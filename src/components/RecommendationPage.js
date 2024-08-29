@@ -31,7 +31,7 @@ const RecommendationPage = () => {
     };
 
     const handleSelectSchedule = () => {
-        axios.post('/api/shortTrip/save', { schedule: recommendations })
+        axios.post('/api/shortTrip/save', recommendations)
             .then(response => {
                 console.log("성공적으로 일정이 저장되었습니다.", response.data);
             })

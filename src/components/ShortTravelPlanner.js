@@ -53,7 +53,7 @@ const ShortTravelPlanner = () => {
           travelPurpose: selectedPurpose
       };
   
-      axios.post('/api/submit', data)
+      axios.post('/api/shortTrip/submit', data)
           .then(response => {
               console.log('성공:', response.data);
               navigate('/recommendation', { 
