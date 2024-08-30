@@ -13,7 +13,7 @@ const MyTravel = () => {
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
-            axios.get('/api/user-info', {
+            axios.get('/api/user/retrieve-info', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
