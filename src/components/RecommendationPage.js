@@ -17,6 +17,7 @@ const RecommendationPage = () => {
     } = location.state || {};
 
     const [currentDay, setCurrentDay] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     if (!recommendations.length) {
         return <p>추천 데이터를 가져오는 중 오류가 발생했습니다.</p>;
@@ -31,13 +32,36 @@ const RecommendationPage = () => {
     };
 
     const handleSelectSchedule = () => {
-        axios.post('/api/shortTrip/save', recommendations)
-            .then(response => {
-                console.log("성공적으로 일정이 저장되었습니다.", response.data);
-            })
-            .catch(error => {
-                console.error("일정 저장 중 오류 발생:", error);
-            });
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            alert("로그인 후 사용해주세요");
+            navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);
+            return;
+        }
+    
+        setLoading(true);
+    
+        axios.post('/api/shortTrip/save', recommendations, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        .then(response => {
+            alert("일정이 성공적으로 저장되었습니다.");
+            navigate('/');  // 홈으로 리다이렉션
+        })
+        .catch(error => {
+            console.error("일정 저장 중 오류 발생:", error);
+            if (error.response && error.response.status === 401) {
+                alert("인증이 필요합니다. 다시 로그인해주세요."); // 인증 오류 처리
+                navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);
+            } else {
+                alert("일정 저장 중 오류가 발생했습니다. 다시 시도해 주세요.");
+            }
+        })
+        .finally(() => {
+            setLoading(false);
+        });
     };
 
     const hashtags = [
@@ -82,7 +106,13 @@ const RecommendationPage = () => {
                         {currentDay < recommendations.length - 1 ? (
                             <button id="nextButton" onClick={handleNextDay}>다음</button>
                         ) : (
-                            <button id="selectButton" onClick={handleSelectSchedule}>이 일정 선택하기</button>
+                            <button 
+                                id="selectButton" 
+                                onClick={handleSelectSchedule}
+                                disabled={loading}
+                            >
+                                {loading ? "저장 중..." : "이 일정 선택하기"}
+                            </button>
                         )}
                     </div>
                 </div>
