@@ -12,6 +12,7 @@ import { reasons, transports, activities, togethers } from '../data/long_trip_da
 
 const LongTrip = () => {
   const [userName, setUserName] = useState('Guest');
+  const [userId, setUserId] = useState('');
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [selectedTransport, setSelectedTransport] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState({ place: '' });
@@ -39,6 +40,7 @@ const LongTrip = () => {
         if(response.status === 200) {
           if(response.data.name) {
             setUserName(response.data.name);
+            setUserId(response.data.id);
           } else {
             localStorage.removeItem('accessToken');
           }
@@ -74,7 +76,13 @@ const LongTrip = () => {
         companion: selectedCompanion,
         travelDate: [startDate, endDate]
     };
-    window.location.href = "/longstays/recommendations";
+
+    const queryParams = new URLSearchParams({
+      id: userId,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+    }).toString();
+    window.location.href = `/longstays/recommendations?${queryParams}`;
       // axios.post('/api/submit', data)
       //     .then(response => {
       //         console.log('성공:', response.data);

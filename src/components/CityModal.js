@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/cityModal.css';
 
 
-const CityModal = ({ city, isOpen, onClose }) => {
+const CityModal = ({ city, isOpen, onClose, selectCity }) => {
     
     if(!isOpen || !city) {
         return null;
@@ -35,7 +35,7 @@ const CityModal = ({ city, isOpen, onClose }) => {
                         <p>이미지를 불러올 수 없습니다.</p>
                     )} 
                 </div>
-                <button onClick={onClose} className='close-modal'>선택하기</button>
+                <button onClick={() => selectCity(city)} className='close-modal'>선택하기</button>
             </div>
         </div>
     );

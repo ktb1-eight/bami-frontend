@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Header from '../components/Header';
 import axios from 'axios';
 import { convert as romanize } from 'hangul-romanization'; // 'convert' 함수를 'romanize'로 사용
@@ -31,11 +33,27 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+export const removeCitySuffix = (cityName) => {
+    return cityName
+        .replace('특별자치도', '')
+        .replace('특별시', '')
+        .replace('광역시', '')
+        .replace('시', '')
+        .replace('군', '');
+};
+
 const LongRecommendationResult = () => {
     const [cities, setCities] = useState([]);
     const [modalOepn, setModalOpen] = useState(false);
     const [confirmModalOepn, setConfirmModalOpen] = useState(false);
     const [selectedCity, setSelectedCity] = useState(null); 
+    const location = useLocation();
+
+    const queryParams = new URLSearchParams(location.search);
+    const userId = queryParams.get('id') ?? '';
+    const startDate = queryParams.get('startDate');
+    const endDate = queryParams.get('endDate');
+
 
     const getCityNames = () => {
         return [
@@ -44,19 +62,10 @@ const LongRecommendationResult = () => {
             { name: '수원' },
             { name: '대구광역시' },
             { name: '대관령' },
-            { name: '부산' },
+            { name: '부산광역시' },
             { name: '보성군' },
             { name: '속초시' },
         ];
-    };
-
-    const removeCitySuffix = (cityName) => {
-        return cityName
-            .replace('특별자치도', '')
-            .replace('특별시', '')
-            .replace('광역시', '')
-            .replace('시', '')
-            .replace('군', '');
     };
 
     useEffect(() => {
@@ -99,8 +108,28 @@ const LongRecommendationResult = () => {
 
     const closeModal = () => {
         setModalOpen(false);
-        setConfirmModalOpen(true);
+    };
+
+    const selectCity = async (city) => {
         // DB 저장
+        if(userId !== '' && userId !== null) {
+            try {
+                const response = await axios.post("/api/save-destination", {
+                    'user': {
+                        'id': userId
+                    },
+                    'location': city.name,
+                    'startDate': startDate,
+                    'endDate': endDate,
+                    'visited': false,
+                });
+                console.log("DB 저장 성공:", response.data);
+            } catch (error) {
+                console.error("DB 저장 실패:", error);
+            }
+        }
+        setModalOpen(false);
+        setConfirmModalOpen(true);
     };
 
     const closeConfirmModal = () => {
@@ -131,7 +160,7 @@ const LongRecommendationResult = () => {
                 ))}
             </ul>
 
-            <CityModal isOpen={modalOepn} onClose={closeModal} city={selectedCity}/>
+            <CityModal isOpen={modalOepn} onClose={closeModal} selectCity={selectCity} city={selectedCity}/>
             {confirmModalOepn && <ConfirmModal isOpen={confirmModalOepn} onClose={closeConfirmModal} cityName={selectedCity.displayName}/>}
         </div>
     );
