@@ -64,6 +64,40 @@ const RecommendationPage = () => {
         });
     };
 
+    const handleRetryRequest = () => {
+
+        setLoading(true);
+
+        const data = {
+            companion: companion,
+            transport: transport,
+            preferences: preferences,
+            gender: location.state.gender || '',
+            ageGroup: location.state.ageGroup || '',
+            location: location.state,
+            travelPurpose: purpose
+        };
+    
+        axios.post('/api/shortTrip/submit', data)
+        .then(response => {
+            navigate('/recommendation', { 
+                state: { 
+                    recommendations: response.data,
+                    companion: companion,
+                    transport: transport,
+                    preferences: preferences,
+                    purpose: purpose
+                }
+            });
+        })
+        .catch(error => {
+            console.error("일정 다시 추천받기 중 오류 발생:", error);
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+    };
+
     const hashtags = [
         companion && `#${companion}`,
         transport && `#${transport}`,
@@ -80,7 +114,16 @@ const RecommendationPage = () => {
             </div>
             <div>
                 <div className="day-plan">
-                    <h3>{recommendations[currentDay].day}</h3>
+                    <div className="day-header">
+                        <h3>{recommendations[currentDay].day}</h3>
+                        <button 
+                            className="retry-button"
+                            onClick={handleRetryRequest}
+                            disabled={loading}
+                        >
+                            일정 다시 추천받기
+                        </button>
+                    </div>
                     <div>
                         {recommendations[currentDay].places.map((place, index) => {
                             const circleClass =

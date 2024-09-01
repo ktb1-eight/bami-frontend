@@ -19,8 +19,43 @@ body {
     color: #000;
     font-size: 32px;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 100px;
     font-size: x-large;
+}
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 25px;
+    position: relative; 
+}
+
+.retry-button {
+    background-color: transparent;
+    border: none;
+    color: #898989;
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    transform: translateY(-10px);
+}
+
+.retry-button:hover {
+    background-color: #fff;
+}
+
+.day-plan h3 {
+    color: #000;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 10px;
 }
 
 .day-plan {
@@ -33,14 +68,7 @@ body {
     position: relative;
 }
 
-.day-plan h3 {
-    color: #000;
-    font-size: 24px;
-    margin-bottom: 25px;
-    margin-left: 15px;
-    font-weight: bold;
-    text-align: left;
-}
+
 
 .place-info {
     display: flex;
