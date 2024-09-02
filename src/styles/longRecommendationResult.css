@@ -1,0 +1,69 @@
+/* LongRecommendationResult.css */
+
+.container {
+    text-align: center;
+    height: 100vh;
+}
+
+#headline1 {
+    font-size: 36px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    font-family: "Light";
+}
+
+#headline2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: #717171;
+    font-family: "Light";
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4개의 열을 생성 */
+    padding: 0;
+    /* margin: 0px 130px; */
+    width: max-content; /* 그리드의 너비를 자식 요소들에 맞춤 */
+    margin: 0 auto; /* 그리드를 화면 중앙에 배치 */
+    row-gap: 22px; /* 각 그리드 항목 사이에 간격을 추가 */
+    column-gap: 113px;
+}
+
+.grid li {
+    width: 13vw;
+    list-style: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.grid img {
+    width: 13vw; /* 화면 너비의 20% */
+    height: 13vw; /* 화면 너비의 20% (정사각형 이미지) */
+    max-width: 100%; /* 이미지가 너무 커지지 않도록 최대 너비를 설정 */
+    max-height: 100%; /* 이미지가 너무 커지지 않도록 최대 높이 설정 */
+    border-radius: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.grid img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+
+.grid #englishName {
+    font-family: "Regular";
+    font-size: 24px;
+    margin: 0;
+    text-align: start;
+    color: #000 ;
+}
+
+.grid #koreanName {
+    font-family: "Light";
+    font-size: 15px;
+    margin: 0;
+    text-align: start;
+}
