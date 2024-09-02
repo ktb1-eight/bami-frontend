@@ -7,13 +7,12 @@ import basic_profile from "../images/profile.png";
 import "../styles/header.css"
 
 const Header = () => {
-  const [userName, setUserName] = useState(null);
   const [userImage, setUserImage] = useState(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      fetch('/api/user-info', {
+      fetch('/api/user/retrieve-info', {
         headers: {
           'Authorization': 'Bearer ' + accessToken
         }
@@ -27,7 +26,6 @@ const Header = () => {
       })
       .then(data => {
         if(data.name) {
-          setUserName(data.name);
           setUserImage(data.image);
         } else {
           localStorage.removeItem('accessToken');
