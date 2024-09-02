@@ -13,7 +13,8 @@ const RecommendationPage = () => {
         companion = '',
         transport = '',
         preferences = { nature: '', newPlaces: '' },
-        purpose = ''
+        purpose = '',
+        startDate = '',
     } = location.state || {};
 
     const [currentDay, setCurrentDay] = useState(0);
@@ -65,7 +66,6 @@ const RecommendationPage = () => {
     };
 
     const handleRetryRequest = () => {
-
         setLoading(true);
 
         const data = {
@@ -86,7 +86,9 @@ const RecommendationPage = () => {
                     companion: companion,
                     transport: transport,
                     preferences: preferences,
-                    purpose: purpose
+                    purpose: purpose,
+                    startDate: startDate,
+                    endDate: location.state.endDate
                 }
             });
         })
@@ -96,6 +98,16 @@ const RecommendationPage = () => {
         .finally(() => {
             setLoading(false);
         });
+    };
+
+    const getFormattedDate = (dateString, daysToAdd) => {
+        const date = new Date(dateString);
+        date.setDate(date.getDate() + daysToAdd);
+        
+        const options = { month: 'long', day: 'numeric', weekday: 'short' };
+        const formattedDate = date.toLocaleDateString('ko-KR', options);
+
+        return formattedDate;
     };
 
     const hashtags = [
@@ -115,7 +127,10 @@ const RecommendationPage = () => {
             <div>
                 <div className="day-plan">
                     <div className="day-header">
-                        <h3>{recommendations[currentDay].day}</h3>
+                        <h3>
+                            {recommendations[currentDay].day} 
+                            <span className="date-text"> {getFormattedDate(startDate, currentDay)}</span>
+                        </h3>
                         <button 
                             className="retry-button"
                             onClick={handleRetryRequest}

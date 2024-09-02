@@ -1,6 +1,6 @@
 /* 달력 CSS */
 /* 달력의 전체 배경색과 테두리 스타일 */
-#calendar .question {
+.calendar .question {
     margin-bottom: 70px;
   }
   
