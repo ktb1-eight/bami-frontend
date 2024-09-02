@@ -1,6 +1,7 @@
 // src/components/Header.js
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import image from '../images/logo.png';
 import basic_profile from "../images/profile.png";
 import "../styles/header.css"
@@ -42,7 +43,7 @@ const Header = () => {
   return (
     <header>
       <a href="/">
-        <img className="logo" src={image} alt="Logo" />
+        <img className="logo" src={logo} alt="Logo" />
       </a>
       <nav>
           <ul>

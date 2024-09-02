@@ -1,0 +1,225 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 450px;
+  padding: 0px;
+  text-align: center;
+}
+
+.purpose-question {
+  margin-top: 50px;
+}
+
+.purpose-button-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 0px 430px;
+  margin-top: 80px;
+}
+
+.purpose-button-group button {
+  text-align: center;
+  font-size: 16px;
+  font-family: "Light";
+  padding: 15px 30px;
+  border: 2px solid #3A3A3A;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.purpose-button-group button.selected {
+  background-color: #87CEEB;
+  color: white;
+  font-family: "Regular";
+  border: #87CEEB;
+}
+
+.title{
+  font-family: "Light";
+  font-size: 32px;
+  margin-top: 130px;
+  margin-bottom: -250px;
+}
+
+.question {
+  font-family: "Light";
+  font-size: 26px;
+  color: #3A3A3A;
+  
+}
+
+.companion-button-group{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0px 430px;  
+  margin-top: 80px;
+}
+
+.transport-button-group{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center; 
+  align-items: center;
+  padding: 0px 360px; 
+  gap: 80px;
+  margin-top: 80px;
+}
+
+.transport-button-group button, .companion-button-group button{
+  text-align: center;
+  font-size: 20px;
+  font-family: "Light";
+  padding: 15px 30px;
+  border: 2px solid #3A3A3A;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.transport-button-group button.selected, .companion-button-group button.selected {
+  background-color: #87CEEB;
+  color: white;
+  font-family: "Regular";
+  border: #87CEEB;
+}
+
+button:hover {
+  background-color: #DEDEDE;
+  color: #3A3A3A;
+  border-color: #3A3A3A;
+}
+
+.submit-button {
+  display: block;
+  margin: 100px auto;
+  padding: 10px 35px;
+  font-size: 20px;
+  font-family: "Light";
+  background-color: #27AAE0;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+  
+.preference-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  gap: 300px;
+}
+
+.preference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.preference button {
+  border: 3px solid;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.preference button.selected {
+  background-color: #919191;
+  color: white;
+}
+
+.preference button:hover {
+  background-color: #B4E9FF; /* 마우스를 올렸을 때 배경색 변경 */
+  border-color: #87CEEB !important; /* 마우스를 올렸을 때 테두리 색상 변경 */
+}
+
+.preference button.selected.size-1,
+.preference button.selected.size-2,
+.preference button.selected.size-3 {
+  background-color: #87CEEB;
+  border-color: #87CEEB;
+}
+
+.preference button.size-1 {
+  border-color:#87CEEB;
+  width: 100px;
+  height: 100px;
+}
+
+.preference button.size-2 {
+  border-color:#87CEEB;
+  width: 80px;
+  height: 80px;
+}
+
+.preference button.size-3 {
+  border-color:#87CEEB;
+  width: 60px;
+  height: 60px;
+}
+
+.preference button.size-4 {
+  border-color: #919191;
+  width: 40px;
+  height: 40px;
+}
+
+.preference button.size-5 {
+  border-color: #A58DC5;
+  width: 60px;
+  height: 60px;
+}
+
+.preference button.size-6 {
+  border-color: #A58DC5;
+  width: 80px;
+  height: 80px;
+}
+
+.preference button.size-7 {
+  border-color: #A58DC5;
+  width: 100px;
+  height: 100px;
+}
+
+.preference button.selected.size-1,
+.preference button.selected.size-2,
+.preference button.selected.size-3 {
+  background-color: #87CEEB;
+  border-color: #87CEEB;
+}
+
+.preference button.selected.size-5,
+.preference button.selected.size-6,
+.preference button.selected.size-7 {
+  background-color: #87CEEB;
+  border-color: #87CEEB;
+
+}
+
+.preference button.selected.size-4 {
+  background-color: #919191;
+  border-color: #919191;
+}
+
+.left-name {
+  color: #27AAE0;
+  width: 200px;
+  font-size: 36px;
+  font-family: "Regular";
+}
+
+.right-name {
+  color: #A58DC5;
+  width: 200px;
+  font-size: 36px;
+  font-family: "Regular";
+}

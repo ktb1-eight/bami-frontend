@@ -1,5 +1,5 @@
 .restaurant-container {
-    padding: 20px;
+    width: 100%;
     max-width: 1200px; /* 화면에 맞게 최대 너비 설정 */
     margin: 0 auto; /* 중앙 정렬 */
 }

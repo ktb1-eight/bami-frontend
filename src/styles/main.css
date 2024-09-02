@@ -42,7 +42,6 @@ main {
 }
 
 #startButton {
-  padding: 20px 20px;
   font-size: 20px;
   border-radius: 10px;
   background-color: #333;
@@ -50,7 +49,10 @@ main {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  align-self: flex-start;
+  justify-content: flex-start;
+  margin-left: 5px;
+  height: 60px;
+  width: 200px;
 }
 
 #startButton:hover {
@@ -67,12 +69,12 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 25px;
 }
 
 .weather-section, .travel-section, .restaurant-section {
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
 }
 

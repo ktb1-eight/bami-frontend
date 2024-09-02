@@ -1,0 +1,133 @@
+.container {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#genderAgeTitle{
+    margin-top: -100px;
+    margin-bottom: 10px;
+    font-size: x-large;
+}
+
+#description{
+    color: #868686;
+}
+
+.gender-selection {
+    display: flex;
+    justify-content: center;
+    gap: 153px;
+    margin: 30px 0;
+}
+
+.gender-card {
+    background-color: #e0e0e0;
+    border-radius: 100%;
+    width: 140px;
+    height: 140px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gender-card p {
+    position: absolute;
+    bottom: -1px;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    color: #000;
+}
+
+.gender-card.selected {
+    border: 1px solid #676161;
+    border-radius: 50%;
+}
+
+.gender-icon.female, .gender-icon.male {
+    width: 160px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: -30px;
+    
+}
+
+.gender-icon.female {
+    background-image: url('../images/female.png');
+}
+
+.gender-icon.male {
+    background-image: url('../images/male.png');
+}
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 180px;
+    row-gap: 30px;
+    margin-top: 30px;
+}
+
+.button-group button {
+    text-align: center;
+    height: 45px;
+    width: 140px;
+    font-size: 15px;
+    border: 2px solid #000000;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.button-group button.selected {
+    background-color: #676161;
+    color: white;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 180px;
+    margin-top: 60px;
+}
+
+.next-button, .apply-button {
+    height: 45px;
+    width: 120px;
+    font-size: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.next-button {
+    background-color: #505050;
+    color: white;
+}
+
+.apply-button {
+    background-color: #87CEEB;
+    color: white;
+}
+
+.apply-button.disabled {
+    background-color: #a4c9f2;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.apply-button.enabled {
+    background-color: #3b82f6;
+    opacity: 1;
+    cursor: pointer;
+}
