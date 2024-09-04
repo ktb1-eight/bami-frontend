@@ -15,6 +15,7 @@ const RecommendationPage = () => {
         preferences = { nature: '', newPlaces: '' },
         purpose = '',
         startDate = '',
+        endDate = '',
     } = location.state || {};
 
     const [currentDay, setCurrentDay] = useState(0);
@@ -34,6 +35,11 @@ const RecommendationPage = () => {
 
     const handleSelectSchedule = () => {
         const accessToken = localStorage.getItem('accessToken');
+        const post_data={
+            recommendations: recommendations,
+            startDate: startDate,
+            endDate: endDate
+        };
         if (!accessToken) {
             alert("로그인 후 사용해주세요");
             navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);
@@ -42,8 +48,8 @@ const RecommendationPage = () => {
     
         setLoading(true);
     
-        axios.post('/api/shortTrip/save', recommendations, {
-            headers: {
+        axios.post('/api/shortTrip/save', post_data, {
+            headers: {  
                 Authorization: `Bearer ${accessToken}`
             }
         })
@@ -52,6 +58,7 @@ const RecommendationPage = () => {
             navigate('/');  // 홈으로 리다이렉션
         })
         .catch(error => {
+            console.log(startDate, endDate)
             console.error("일정 저장 중 오류 발생:", error);
             if (error.response && error.response.status === 401) {
                 alert("인증이 필요합니다. 다시 로그인해주세요."); // 인증 오류 처리
@@ -88,7 +95,7 @@ const RecommendationPage = () => {
                     preferences: preferences,
                     purpose: purpose,
                     startDate: startDate,
-                    endDate: location.state.endDate
+                    endDate: endDate
                 }
             });
         })
