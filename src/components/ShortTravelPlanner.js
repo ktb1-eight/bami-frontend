@@ -64,12 +64,16 @@ const ShortTravelPlanner = () => {
           location: location.state,
           travelPurpose: selectedPurpose,
           startDate: formatDateForBackend(startDate),
-          endDate: formatDateForBackend(endDate)
+          endDate: formatDateForBackend(endDate),
+          latitude: location.state?.latitude,
+          longitude: location.state?.longitude
       };
   
       axios.post('/api/shortTrip/submit', data)
           .then(response => {
               console.log('성공:', response.data);
+              console.log(location.state?.latitude);
+              console.log(location.state?.longitude);
               navigate('/recommendation', {
                   state: {
                       recommendations: response.data,
@@ -79,6 +83,8 @@ const ShortTravelPlanner = () => {
                       purpose: selectedPurpose,
                       startDate: startDate.toISOString(), // startDate를 상태로 전달
                       endDate: endDate.toISOString(),
+                      latitude: location.state?.latitude,
+                      longitude: location.state?.longitude,
                   }
               });
           })

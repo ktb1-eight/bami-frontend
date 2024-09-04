@@ -35,11 +35,17 @@ const RecommendationPage = () => {
 
     const handleSelectSchedule = () => {
         const accessToken = localStorage.getItem('accessToken');
+        console.log(location.state?.latitude);
+        console.log(location.state?.longitude);
         const post_data={
             recommendations: recommendations,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            latitude: location.state?.latitude,
+            longitude: location.state?.longitude
         };
+        console.log("Sending data to backend:", post_data); // 데이터 로깅
+
         if (!accessToken) {
             alert("로그인 후 사용해주세요");
             navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);

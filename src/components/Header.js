@@ -1,7 +1,4 @@
-// src/components/Header.js
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import basic_profile from "../images/profile.png";
 import "../styles/header.css"

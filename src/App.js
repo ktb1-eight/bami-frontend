@@ -10,6 +10,7 @@ import './App.css';
 import ShortTravelPlanner from './components/ShortTravelPlanner';
 import GenderAgeSelector from './components/GenderAgeSelector';
 import RecommendationPage from './components/RecommendationPage';
+import TravelDetailPage from './components/TravelDetailPage';
 import MyTravel from './views/myTravel';
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="/travel-planner" element={<ShortTravelPlanner />} />
           <Route path="/travel-selectInfo" element={<GenderAgeSelector />} />
           <Route path="/recommendation" element={<RecommendationPage />} />
+          <Route path="/travel-detail" element={<TravelDetailPage />} />
         </Routes>
       </div>
     </Router>

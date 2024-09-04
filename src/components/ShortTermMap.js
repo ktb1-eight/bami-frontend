@@ -35,6 +35,7 @@ const ShortTermMap = () => {
       setInfowindow(infowindow);
 
       kakao.maps.event.addListener(marker, 'click', () => {
+        console.log(latitude, longitude);
         navigate('/travel-selectInfo', { state: { latitude, longitude } });
       });
 
@@ -85,20 +86,21 @@ const ShortTermMap = () => {
       map: map,
       position: new kakao.maps.LatLng(place.y, place.x)
     });
-
+  
     kakao.maps.event.addListener(marker, 'click', () => {
+      console.log('Clicked marker position:', place.y, place.x);  // 로그 확인
       navigate('/travel-selectInfo', { state: { latitude: place.y, longitude: place.x } });
     });
-
+  
     kakao.maps.event.addListener(marker, 'mouseover', () => {
       infowindow.setContent(`<div style="padding:5px;font-size:12px;">${place.place_name}</div>`);
       infowindow.open(map, marker);
     });
-
+  
     kakao.maps.event.addListener(marker, 'mouseout', () => {
       infowindow.close();
     });
-
+  
     setMarkers((prevMarkers) => [...prevMarkers, marker]);
   };
 
