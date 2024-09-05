@@ -9,7 +9,7 @@ const Header = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      fetch('/api/user/retrieve-info', {
+      fetch(process.env.REACT_APP_PROXY + '/api/user/retrieve-info', {
         headers: {
           'Authorization': 'Bearer ' + accessToken
         }

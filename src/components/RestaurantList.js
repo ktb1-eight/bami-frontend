@@ -10,7 +10,7 @@ const RestaurantList = ({ setCity }) => {
     // 기본 서울 시청 맛집 정보 가져오기
     const fetchDefaultRestaurants = useCallback(async () => {
         try {
-            const response = await axios.get('/api/restaurant', {
+            const response = await axios.get(process.env.REACT_APP_PROXY + '/api/restaurant', {
                 params: {
                     nx: null,
                     ny: null
@@ -29,7 +29,7 @@ const RestaurantList = ({ setCity }) => {
     // 현재 위치 기반 맛집 정보 가져오기
     const fetchRestaurants = useCallback(async (latitude, longitude) => {
         try {
-            const response = await axios.get('/api/restaurant', {
+            const response = await axios.get(process.env.REACT_APP_PROXY + '/api/restaurant', {
                 params: {
                     nx: latitude,
                     ny: longitude

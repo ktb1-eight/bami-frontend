@@ -11,7 +11,7 @@ const MyTravel = () => {
     const navigate = useNavigate();
 
     const fetchTravelPlans = useCallback((accessToken) => {
-        axios.get('/api/user/travel-plans', {
+        axios.get(process.env.REACT_APP_PROXY + '/api/user/travel-plans', {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
@@ -30,7 +30,7 @@ const MyTravel = () => {
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
-            axios.get('/api/user/retrieve-info', {
+            axios.get(process.env.REACT_APP_PROXY + '/api/user/retrieve-info', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
@@ -57,7 +57,7 @@ const MyTravel = () => {
     const loadCityImages = (plans) => {
         plans.forEach(plan => {
             const firstPlace = plan.recommendations[0].places[0];
-            axios.get(`/api/city-image/${firstPlace.name} 풍경`)
+            axios.get(process.env.REACT_APP_PROXY + `/api/city-image/${firstPlace.name} 풍경`)
                 .then(response => {
                     if (response.data.items && response.data.items.length > 0) {
                         const imageUrls = response.data.items.map(item => item.link);

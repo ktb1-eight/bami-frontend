@@ -9,7 +9,7 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchUserInfo = (accessToken) => {
-            fetch('/api/user/retrieve-info', {
+            fetch(process.env.REACT_APP_PROXY + '/api/user/retrieve-info', {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 }
@@ -51,7 +51,7 @@ const Profile = () => {
     }, [editedName, userInfo]);
 
     const refreshToken = () => {
-        return fetch('/api/user/refresh-token', {
+        return fetch(process.env.REACT_APP_PROXY + '/api/user/refresh-token', {
             method: 'GET',
             credentials: 'include' // Ensure cookies are sent with the request
         })
@@ -106,7 +106,7 @@ const Profile = () => {
     const handleDeleteAccount = () => {
         const accessToken = localStorage.getItem('accessToken');
 
-        fetch('/api/user/delete-info', {
+        fetch(process.env.REACT_APP_PROXY + '/api/user/delete-info', {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Bearer ' + accessToken
