@@ -92,4 +92,5 @@
 .date-text {
     font-size: 18px !important;
     margin: 0 !important; /* 텍스트 주위의 기본 여백을 제거합니다 */
+    color: white;
 }

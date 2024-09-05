@@ -9,6 +9,7 @@ import { ko } from 'date-fns/locale';
 
 import PreferenceSelector from '../components/PreferenceSelector';
 import { reasons, transports, activities, togethers } from '../data/long_trip_data';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const LongTrip = () => {
   const [userName, setUserName] = useState('Guest');
@@ -199,7 +200,7 @@ const LongTrip = () => {
           </div>
         </div>
         {/* 달력 */}
-        <div id='calendar'>
+        <div className='calendar'>
             <p className='question'>여행 날짜를 선택해주세요.</p>
             <DatePicker
                 selected={startDate}

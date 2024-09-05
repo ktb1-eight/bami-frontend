@@ -30,6 +30,8 @@ const GenderAgeSelector = () => {
             return;
         }
 
+        console.log(location.state?.latitude)
+        console.log(location.state?.longitude)
         // 위치 정보도 함께 전달
         navigate('/travel-planner', { 
             state: { 

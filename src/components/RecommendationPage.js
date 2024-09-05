@@ -13,7 +13,9 @@ const RecommendationPage = () => {
         companion = '',
         transport = '',
         preferences = { nature: '', newPlaces: '' },
-        purpose = ''
+        purpose = '',
+        startDate = '',
+        endDate = '',
     } = location.state || {};
 
     const [currentDay, setCurrentDay] = useState(0);
@@ -33,6 +35,17 @@ const RecommendationPage = () => {
 
     const handleSelectSchedule = () => {
         const accessToken = localStorage.getItem('accessToken');
+        console.log(location.state?.latitude);
+        console.log(location.state?.longitude);
+        const post_data={
+            recommendations: recommendations,
+            startDate: startDate,
+            endDate: endDate,
+            latitude: location.state?.latitude,
+            longitude: location.state?.longitude
+        };
+        console.log("Sending data to backend:", post_data); // 데이터 로깅
+
         if (!accessToken) {
             alert("로그인 후 사용해주세요");
             navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);
@@ -41,8 +54,8 @@ const RecommendationPage = () => {
     
         setLoading(true);
     
-        axios.post('/api/shortTrip/save', recommendations, {
-            headers: {
+        axios.post('/api/shortTrip/save', post_data, {
+            headers: {  
                 Authorization: `Bearer ${accessToken}`
             }
         })
@@ -51,6 +64,7 @@ const RecommendationPage = () => {
             navigate('/');  // 홈으로 리다이렉션
         })
         .catch(error => {
+            console.log(startDate, endDate)
             console.error("일정 저장 중 오류 발생:", error);
             if (error.response && error.response.status === 401) {
                 alert("인증이 필요합니다. 다시 로그인해주세요."); // 인증 오류 처리
@@ -65,7 +79,6 @@ const RecommendationPage = () => {
     };
 
     const handleRetryRequest = () => {
-
         setLoading(true);
 
         const data = {
@@ -86,7 +99,9 @@ const RecommendationPage = () => {
                     companion: companion,
                     transport: transport,
                     preferences: preferences,
-                    purpose: purpose
+                    purpose: purpose,
+                    startDate: startDate,
+                    endDate: endDate
                 }
             });
         })
@@ -96,6 +111,16 @@ const RecommendationPage = () => {
         .finally(() => {
             setLoading(false);
         });
+    };
+
+    const getFormattedDate = (dateString, daysToAdd) => {
+        const date = new Date(dateString);
+        date.setDate(date.getDate() + daysToAdd);
+        
+        const options = { month: 'long', day: 'numeric', weekday: 'short' };
+        const formattedDate = date.toLocaleDateString('ko-KR', options);
+
+        return formattedDate;
     };
 
     const hashtags = [
@@ -115,7 +140,10 @@ const RecommendationPage = () => {
             <div>
                 <div className="day-plan">
                     <div className="day-header">
-                        <h3>{recommendations[currentDay].day}</h3>
+                        <h3>
+                            {recommendations[currentDay].day} 
+                            <span className="date-text"> {getFormattedDate(startDate, currentDay)}</span>
+                        </h3>
                         <button 
                             className="retry-button"
                             onClick={handleRetryRequest}
