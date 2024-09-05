@@ -84,14 +84,14 @@ const LongTrip = () => {
       endDate: endDate.toISOString(),
     }).toString();
     window.location.href = `/longstays/recommendations?${queryParams}`;
-      // axios.post('/api/submit', data)
-      //     .then(response => {
-      //         console.log('성공:', response.data);
-      //         navigate('/'); // 성공적으로 제출된 후 홈 페이지로 이동
-      //     })
-      //     .catch(error => {
-      //         console.error('오류:', error);
-      //     });
+    axios.post(process.env.REACT_APP_PROXY + '/api/predict', data)
+        .then(response => {
+            console.log('성공:', response.data);
+            navigate('/'); // 성공적으로 제출된 후 홈 페이지로 이동
+        })
+        .catch(error => {
+            console.error('오류:', error);
+        });
   };
 
   const handleReasonClick = (reason) => {
