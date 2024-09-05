@@ -8,7 +8,7 @@ const Weather = () => {
     // 위도와 경도에 따른 날씨 데이터를 가져오는 함수
     const fetchWeather = useCallback(async (latitude, longitude) => {
         try {
-            const response = await axios.get('/api/weather', {
+            const response = await axios.get(process.env.REACT_APP_PROXY + '/api/weather', {
                 params: {
                     nx: latitude,
                     ny: longitude
@@ -23,7 +23,7 @@ const Weather = () => {
     // 기본 날씨 데이터 (서울시청) 가져오기
     const fetchDefaultWeather = useCallback(async () => {
         try {
-            const response = await axios.get('/api/weather', {
+            const response = await axios.get(process.env.REACT_APP_PROXY + '/api/weather', {
                 params: {
                     nx: null,
                     ny: null

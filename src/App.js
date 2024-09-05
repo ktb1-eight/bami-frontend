@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch('/api/config');
+        const response = await fetch(process.env.REACT_APP_PROXY + '/api/config');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

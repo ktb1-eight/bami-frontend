@@ -32,7 +32,7 @@ const LongTrip = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if(accessToken) {
-      axios.get('/api/user/retrieve-info', {
+      axios.get(process.env.REACT_APP_PROXY + '/api/user/retrieve-info', {
         headers: {
           'Authorization': 'Bearer ' + accessToken
         }

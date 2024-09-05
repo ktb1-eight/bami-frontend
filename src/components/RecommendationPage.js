@@ -54,7 +54,7 @@ const RecommendationPage = () => {
     
         setLoading(true);
     
-        axios.post('/api/shortTrip/save', post_data, {
+        axios.post(process.env.REACT_APP_PROXY + '/api/shortTrip/save', post_data, {
             headers: {  
                 Authorization: `Bearer ${accessToken}`
             }
@@ -91,7 +91,7 @@ const RecommendationPage = () => {
             travelPurpose: purpose
         };
     
-        axios.post('/api/shortTrip/submit', data)
+        axios.post(process.env.REACT_APP_PROXY + '/api/shortTrip/submit', data)
         .then(response => {
             navigate('/recommendation', { 
                 state: { 

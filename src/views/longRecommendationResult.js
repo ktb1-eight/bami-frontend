@@ -10,7 +10,7 @@ import ConfirmModal from '../components/ConfirmModal';
 
 const fetchImages = async (query) => {
     try {
-        const response = await axios.get(`/api/longstay/city-image/${query}`);
+        const response = await axios.get(process.env.REACT_APP_PROXY + `/api/longstay/city-image/${query}`);
         const data = response.data;
         return data && data.items ? data.items.map(item => item.link) : []; // 모든 이미지 URL을 배열로 반환
     } catch (error) {
@@ -21,7 +21,7 @@ const fetchImages = async (query) => {
 
 const fetchDescription = async (cityName) => {
     try {
-        const response = await axios.get(`/api/longstay/city-description/${cityName}`);
+        const response = await axios.get(process.env.REACT_APP_PROXY + `/api/longstay/city-description/${cityName}`);
         return response.data;
     } catch(e) {
         console.error("Error fetching city description:", e);

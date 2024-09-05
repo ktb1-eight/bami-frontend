@@ -69,7 +69,7 @@ const ShortTravelPlanner = () => {
           longitude: location.state?.longitude
       };
   
-      axios.post('/api/shortTrip/submit', data)
+      axios.post(process.env.REACT_APP_PROXY + '/api/shortTrip/submit', data)
           .then(response => {
               console.log('성공:', response.data);
               console.log(location.state?.latitude);
