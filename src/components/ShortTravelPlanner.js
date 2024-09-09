@@ -42,56 +42,57 @@ const ShortTravelPlanner = () => {
     }, [location.state]);
 
     const handleSubmit = () => {
-      if (!selectedCompanion || !selectedTransport || !Object.values(selectedPreferences).every(Boolean) || !startDate || !endDate) {
-          alert('모든 필드를 선택해주세요!');
-          if (!selectedCompanion) companionRef.current.scrollIntoView({ behavior: 'smooth' });
-          else if (!selectedTransport) transportRef.current.scrollIntoView({ behavior: 'smooth' });
-          else if (!startDate || !endDate) calendarRef.current.scrollIntoView({ behavior: 'smooth' });
-          else preferencesRef.current.scrollIntoView({ behavior: 'smooth' });
-          return;
-      }
-  
-      const formatDateForBackend = (date) => {
-          return date.toISOString().split('T')[0]; // "YYYY-MM-DD" 형식으로 변환
-      };
-  
-      const data = {
-          companion: selectedCompanion,
-          transport: selectedTransport,
-          preferences: selectedPreferences,
-          gender: gender,
-          ageGroup: ageGroup,
-          location: location.state,
-          travelPurpose: selectedPurpose,
-          startDate: formatDateForBackend(startDate),
-          endDate: formatDateForBackend(endDate),
-          latitude: location.state?.latitude,
-          longitude: location.state?.longitude
-      };
-  
-      axios.post(process.env.REACT_APP_PROXY + '/api/shortTrip/submit', data)
-          .then(response => {
-              console.log('성공:', response.data);
-              console.log(location.state?.latitude);
-              console.log(location.state?.longitude);
-              navigate('/recommendation', {
-                  state: {
-                      recommendations: response.data,
-                      companion: selectedCompanion,
-                      transport: selectedTransport,
-                      preferences: selectedPreferences,
-                      purpose: selectedPurpose,
-                      startDate: startDate.toISOString(), // startDate를 상태로 전달
-                      endDate: endDate.toISOString(),
-                      latitude: location.state?.latitude,
-                      longitude: location.state?.longitude,
-                  }
-              });
-          })
-          .catch(error => {
-              console.error('오류:', error);
-          });
+    if (!selectedCompanion || !selectedTransport || !Object.values(selectedPreferences).every(Boolean) || !startDate || !endDate) {
+        alert('모든 필드를 선택해주세요!');
+        return;
+    }
+
+    const formatDateForBackend = (date) => {
+        return date.toISOString().split('T')[0]; // "YYYY-MM-DD" 형식으로 변환
     };
+
+    const calculateDuration = (start, end) => {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const differenceInTime = endDate.getTime() - startDate.getTime();
+        return Math.ceil(differenceInTime / (1000 * 3600 * 24)) + 1; // 일 단위 계산
+    };
+
+    const data = {
+        companion: selectedCompanion,
+        transport: selectedTransport,
+        preferences: selectedPreferences,
+        gender: gender,
+        ageGroup: ageGroup,
+        location: location.state,
+        travelPurpose: selectedPurpose,
+        startDate: formatDateForBackend(startDate),  // 시작 날짜
+        endDate: formatDateForBackend(endDate),      // 종료 날짜
+        day_duration: calculateDuration(startDate, endDate), // 여행 기간 계산
+        latitude: location.state?.latitude,
+        longitude: location.state?.longitude
+    };
+
+    axios.post(process.env.REACT_APP_PROXY + '/api/shortTrip/submit', data)
+        .then(response => {
+            navigate('/recommendation', {
+                state: {
+                    recommendations: response.data,
+                    companion: selectedCompanion,
+                    transport: selectedTransport,
+                    preferences: selectedPreferences,
+                    purpose: selectedPurpose,
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString(),
+                    latitude: location.state?.latitude,
+                    longitude: location.state?.longitude,
+                }
+            });
+        })
+        .catch(error => {
+            console.error('오류:', error);
+        });
+};
 
     const handleCompanionClick = (companion) => {
         setSelectedCompanion(selectedCompanion === companion ? '' : companion);
