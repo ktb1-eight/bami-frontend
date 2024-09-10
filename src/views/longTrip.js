@@ -87,7 +87,7 @@ const LongTrip = () => {
     axios.post(process.env.REACT_APP_PROXY + '/api/predict', data)
         .then(response => {
             console.log('성공:', response.data);
-            navigate('/'); // 성공적으로 제출된 후 홈 페이지로 이동
+            window.location.href = "/"
         })
         .catch(error => {
             console.error('오류:', error);
@@ -132,10 +132,10 @@ const LongTrip = () => {
       <Header />
         <p id='startText'>{userName} 님이 오래 머무실 곳을 추천해드리기 전 몇가지를 알려주세요!</p>
 
-        <div className="form-container">
+        <div className="long-form-container">
         <div ref={reasonRef}>
           <p className='question'>오랜 여행을 결심하게 된 이유가 있나요?</p>
-          <div className="button-group">
+          <div className="long-button-group">
             {reasons.map((reason) => (
               <button
                 key={reason}
@@ -149,7 +149,7 @@ const LongTrip = () => {
         </div>
         <div ref={transportRef}>
           <p className='question'>이동수단을 선택해주세요.</p>
-          <div className="button-group">
+          <div className="long-button-group">
             {transports.map((transport) => (
               <button
                 key={transport}
@@ -173,7 +173,7 @@ const LongTrip = () => {
         </div>
         <div ref={activityRef}>
           <p className='question'>머무시는 동안 어떤 활동을 하고 싶은가요?</p>
-          <div className="grid-button-group">
+          <div className="long-grid-button-group">
             {activities.map((activity) => (
               <button
                 key={activity}
@@ -187,7 +187,7 @@ const LongTrip = () => {
         </div>
         <div ref={companionRef}>
           <p className='question'>동행인이 있으면 선택해주세요.</p>
-          <div className="grid-button-group">
+          <div className="long-grid-button-group">
             {togethers.map((together) => (
               <button
                 key={together}
