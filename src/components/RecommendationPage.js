@@ -166,7 +166,7 @@ const RecommendationPage = () => {
                                     <div className={circleClass}>{index + 1}</div>
                                     <div className="place-details">
                                         <h4>{place.name}</h4>
-                                        <p>{place.lotnoAddress}</p>
+                                        <p>{place.city}</p>
                                     </div>
                                 </div>
                             );
