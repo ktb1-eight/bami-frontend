@@ -84,7 +84,7 @@ const LongTrip = () => {
       endDate: endDate.toISOString(),
     }).toString();
     window.location.href = `/longstays/recommendations?${queryParams}`;
-    axios.post(process.env.REACT_APP_PROXY + '/api/predict', data)
+    axios.post(process.env.AI_PROXY + '/api/predict', data)
         .then(response => {
             console.log('성공:', response.data);
             window.location.href = "/"

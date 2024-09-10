@@ -4,7 +4,6 @@ import "../styles/restaurant.css"; // 스타일 시트 추가
 
 const RestaurantList = ({ setCity }) => {
     const [restaurants, setRestaurants] = useState([]);
-    const [city, setLocalCity] = useState(''); // 도시 정보
     const [loading, setLoading] = useState(true); // 로딩 상태 추가
 
     // 기본 서울 시청 맛집 정보 가져오기
@@ -17,7 +16,6 @@ const RestaurantList = ({ setCity }) => {
                 }
             });
             setRestaurants(response.data.restaurants);
-            setLocalCity(response.data.city);
             setCity(response.data.city);
         } catch (error) {
             console.error('기본 맛집 정보를 가져오는 중 오류 발생', error);
@@ -36,7 +34,6 @@ const RestaurantList = ({ setCity }) => {
                 }
             });
             setRestaurants(response.data.restaurants);
-            setLocalCity(response.data.city);
             setCity(response.data.city);
         } catch (error) {
             console.error('맛집 정보를 가져오는 중 오류 발생', error);
