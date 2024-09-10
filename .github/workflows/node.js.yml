@@ -41,19 +41,19 @@ jobs:
       # React 빌드: SSM에서 NODE_OPTIONS 가져와 빌드 시 사용
       - name: Build the project with Parameter Store values
         run: |
-          NODE_OPTIONS=$(aws ssm get-parameter --name '/bami/NODE_OPTIONS' --query 'Parameter.Value' --output text)
-          REACT_APP_KAKAO_MAP_API_KEY=$(aws ssm get-parameter --name '/bami/REACT_APP_KAKAO_MAP_API_KEY' --query 'Parameter.Value' --output text)
-          REACT_APP_PROXY=$(aws ssm get-parameter --name '/bami/REACT_APP_PROXY' --query 'Parameter.Value' --output text)
+          NODE_OPTIONS=$(aws ssm get-parameter --name "/bami/NODE_OPTIONS" --query "Parameter.Value" --output text)
+          REACT_APP_KAKAO_MAP_API_KEY=$(aws ssm get-parameter --name "/bami/REACT_APP_KAKAO_MAP_API_KEY" --query "Parameter.Value" --output text)
+          REACT_APP_PROXY=$(aws ssm get-parameter --name "/bami/REACT_APP_PROXY" --query "Parameter.Value" --output text)
           NODE_OPTIONS=$NODE_OPTIONS REACT_APP_KAKAO_MAP_API_KEY=$REACT_APP_KAKAO_MAP_API_KEY REACT_APP_PROXY=$REACT_APP_PROXY npm run build
 
       # S3로 빌드 파일 업로드: SSM에서 S3 버킷 이름 가져와 사용
       - name: Sync S3
         run: |
-          S3_BUCKET_NAME=$(aws ssm get-parameter --name '/bami/S3_BUCKET_NAME' --query 'Parameter.Value' --output text)
+          S3_BUCKET_NAME=$(aws ssm get-parameter --name "/bami/S3_BUCKET_NAME" --query "Parameter.Value" --output text)
           aws s3 sync ./build s3://$S3_BUCKET_NAME --delete
 
       # CloudFront 캐시 무효화: SSM에서 CloudFront 배포 ID 가져와 사용
       - name: Invalidate CloudFront cache
         run: |
-          CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name '/bami/CLOUDFRONT_DISTRIBUTION_ID' --query 'Parameter.Value' --output text)
+          CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name "/bami/CLOUDFRONT_DISTRIBUTION_ID" --query "Parameter.Value" --output text)
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
