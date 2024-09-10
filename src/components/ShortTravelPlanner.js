@@ -6,7 +6,7 @@ import Header from './Header';
 import PreferenceSelector from './PreferenceSelector';
 import DatePicker from 'react-datepicker';
 import { ko } from 'date-fns/locale';
-import 'react-datepicker/dist/react-datepicker.css';
+import '../styles/calendar.css';
 
 const ShortTravelPlanner = () => {
     const location = useLocation();

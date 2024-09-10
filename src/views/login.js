@@ -25,7 +25,7 @@ const Login = ({ config }) => {
     const { googleClientId, googleRedirectUri, naverClientId, naverRedirectUri, kakaoClientId, kakaoRedirectUri } = config;
 
     return (
-        <div className='container'>
+        <div className='login-container'>
             <Header />
             <main>
                 <div className='heading'>

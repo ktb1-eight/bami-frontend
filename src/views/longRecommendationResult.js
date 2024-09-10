@@ -138,7 +138,7 @@ const LongRecommendationResult = () => {
     }
 
     return (
-        <div className="container">
+        <div className="result-container">
             <Header />
             <p id='headline1'>알려주신 내용을 바탕으로 추천하는 한달 살이 여행지입니다.</p>
             <p id='headline2'>이미지 위로 커서를 올리면 정보를 알 수 있어요</p>
