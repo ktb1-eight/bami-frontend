@@ -47,7 +47,7 @@ jobs:
           echo "kakao map api key: ok"
           REACT_APP_PROXY=$(aws ssm get-parameter --name "/bami/REACT_APP_PROXY" --query "Parameter.Value" --output text)
           echo "react app proxy: ok"
-          NODE_OPTIONS=$NODE_OPTIONS REACT_APP_KAKAO_MAP_API_KEY=$REACT_APP_KAKAO_MAP_API_KEY REACT_APP_PROXY=$REACT_APP_PROXY npm run build
+          NODE_OPTIONS=$NODE_OPTIONS REACT_APP_KAKAO_MAP_API_KEY=$REACT_APP_KAKAO_MAP_API_KEY REACT_APP_PROXY=$REACT_APP_PROXY CI=false npm run build
 
       # S3로 빌드 파일 업로드: SSM에서 S3 버킷 이름 가져와 사용
       - name: Sync S3
