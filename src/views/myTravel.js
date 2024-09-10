@@ -12,7 +12,7 @@ const MyTravel = () => {
 
     const fetchTravelPlans = useCallback((accessToken) => {
         axios.get(process.env.REACT_APP_PROXY + '/api/user/travel-plans', {
-            headers: {
+            headers: { 
                 'Authorization': 'Bearer ' + accessToken
             }
         })
@@ -120,7 +120,7 @@ const MyTravel = () => {
                     <div className="travel-card-container">
                         {travelPlans
                             .filter(plan => new Date(plan.endDate) >= today)
-                            .sort((a, b) => new Date(a.startDate) - new Date(b.startDate)) // 예정된 여행은 시작일 기준 오름차순 정렬
+                            .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
                             .map(plan => (
                                 <div 
                                     className="travel-card" 
@@ -135,7 +135,8 @@ const MyTravel = () => {
                                         />
                                     )}
                                     <div className='travel-card-text'>
-                                        <p className="location-text">{plan.recommendations[0].places[0].name}</p>
+                                        {/* address를 출력 */}
+                                        <p className="location-text">{plan.address}</p>  
                                         <p className="date-text">
                                             {formatDate(plan.startDate)} ~ {formatDate(plan.endDate)}
                                         </p>
@@ -163,7 +164,8 @@ const MyTravel = () => {
                                         />
                                     )}
                                     <div className='travel-card-text'>
-                                        <p className="location-text">{plan.recommendations[0].places[0].name}</p>
+                                        {/* address를 출력 */}
+                                        <p className="location-text">{plan.address}</p>  
                                         <p className="date-text">
                                             {formatDate(plan.startDate)} ~ {formatDate(plan.endDate)}
                                         </p>
@@ -176,6 +178,5 @@ const MyTravel = () => {
         </div>
     );
 };
-
 
 export default MyTravel;
