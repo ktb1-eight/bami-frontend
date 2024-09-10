@@ -28,7 +28,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
       # AWS 자격증명 설정
       - name: Configure AWS credentials
