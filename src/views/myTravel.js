@@ -56,8 +56,9 @@ const MyTravel = () => {
 
     const loadCityImages = (plans) => {
         plans.forEach(plan => {
-            const firstPlace = plan.recommendations[0].places[0];
-            axios.get(process.env.REACT_APP_PROXY + `/api/city-image/${firstPlace.name} 풍경`)
+            const firstPlace = plan.address.split(" ")[0];
+            
+            axios.get(process.env.REACT_APP_PROXY + `/api/longstay/city-image/${firstPlace} 풍경`)
                 .then(response => {
                     if (response.data.items && response.data.items.length > 0) {
                         const imageUrls = response.data.items.map(item => item.link);
@@ -136,7 +137,7 @@ const MyTravel = () => {
                                     )}
                                     <div className='travel-card-text'>
                                         {/* address를 출력 */}
-                                        <p className="location-text">{plan.address}</p>  
+                                        <p className="location-text">{plan.address.split(" ")[0]}</p>  
                                         <p className="date-text">
                                             {formatDate(plan.startDate)} ~ {formatDate(plan.endDate)}
                                         </p>
@@ -165,7 +166,7 @@ const MyTravel = () => {
                                     )}
                                     <div className='travel-card-text'>
                                         {/* address를 출력 */}
-                                        <p className="location-text">{plan.address}</p>  
+                                        <p className="location-text">{plan.address.split(" ")[0]}</p>  
                                         <p className="date-text">
                                             {formatDate(plan.startDate)} ~ {formatDate(plan.endDate)}
                                         </p>
