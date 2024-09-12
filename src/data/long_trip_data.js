@@ -17,6 +17,9 @@ export const transports = [
   '차가 있어요',
   '대중교통',
 ];
+export const transportsValue = [
+  '자가용', '대중교통 등' 
+];
 
 export const activities = [
   '체험',
