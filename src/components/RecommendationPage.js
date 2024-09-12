@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/recommendationPage.css';
 import Header from './Header';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RecommendationPage = () => {
     const location = useLocation();
@@ -47,7 +49,6 @@ const RecommendationPage = () => {
         console.log("Sending data to backend:", post_data); // 데이터 로깅
 
         if (!accessToken) {
-            alert("로그인 후 사용해주세요");
             navigate(`/login?redirectUri=${encodeURIComponent(window.location.href)}`);
             return;
         }
@@ -60,8 +61,17 @@ const RecommendationPage = () => {
             }
         })
         .then(response => {
-            alert("일정이 성공적으로 저장되었습니다.");
-            navigate('/');  // 홈으로 리다이렉션
+            toast.success("일정이 성공적으로 저장되었습니다.", {
+                position: "top-center",
+                autoClose: 2000, // 3초 후 자동으로 닫힘
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            // 일정 저장 후 일정 페이지로 리다이렉션
+            setTimeout(() => navigate('/myTravel'));
         })
         .catch(error => {
             console.log(startDate, endDate)
