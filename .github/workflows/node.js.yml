@@ -1,0 +1,62 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Deploy to S3 and CloudFront
+
+on:
+  push:
+    branches:
+    - main
+    - develop
+  pull_request:
+    branches:
+    - main
+    - develop
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --save-dev @babel/plugin-proposal-private-property-in-object
+
+      # AWS 자격증명 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.REGION }}
+
+      # React 빌드: SSM에서 NODE_OPTIONS 가져와 빌드 시 사용
+      - name: Build the project with Parameter Store values
+        run: |
+          NODE_OPTIONS=$(aws ssm get-parameter --name "/bami/NODE_OPTIONS" --query "Parameter.Value" --output text)
+          echo "NODE_OPTIONS: ok"
+          REACT_APP_KAKAO_MAP_API_KEY=$(aws ssm get-parameter --name "/bami/REACT_APP_KAKAO_MAP_API_KEY" --query "Parameter.Value" --output text)
+          echo "kakao map api key: ok"
+          REACT_APP_PROXY=$(aws ssm get-parameter --name "/bami/REACT_APP_PROXY" --query "Parameter.Value" --output text)
+          echo "react app proxy: ok"
+          NODE_OPTIONS=$NODE_OPTIONS REACT_APP_KAKAO_MAP_API_KEY=$REACT_APP_KAKAO_MAP_API_KEY REACT_APP_PROXY=$REACT_APP_PROXY CI=false npm run build
+
+      # S3로 빌드 파일 업로드: SSM에서 S3 버킷 이름 가져와 사용
+      - name: Sync S3
+        run: |
+          S3_BUCKET_NAME=$(aws ssm get-parameter --name "/bami/S3_BUCKET_NAME" --query "Parameter.Value" --output text)
+          aws s3 sync ./build s3://$S3_BUCKET_NAME --delete
+
+      # CloudFront 캐시 무효화: SSM에서 CloudFront 배포 ID 가져와 사용
+      - name: Invalidate CloudFront cache
+        run: |
+          CLOUDFRONT_DISTRIBUTION_ID=$(aws ssm get-parameter --name "/bami/CLOUDFRONT_DISTRIBUTION_ID" --query "Parameter.Value" --output text)
+          aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
