@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import '../styles/genderAgeSelector.css';
 import Header from './Header';
 
 const GenderAgeSelector = () => {
+    const [searchParams] = useSearchParams();
+  
+    // longterm 파라미터를 가져옴
+    const isLongTerm = searchParams.get('longterm') === 'true';
+
+
     const [selectedGender, setSelectedGender] = useState('');
     const [selectedAgeGroup, setSelectedAgeGroup] = useState('');
     const [isApplyEnabled, setIsApplyEnabled] = useState(false);
@@ -33,14 +39,25 @@ const GenderAgeSelector = () => {
         console.log(location.state?.latitude)
         console.log(location.state?.longitude)
         // 위치 정보도 함께 전달
-        navigate('/travel-planner', { 
-            state: { 
-                gender: selectedGender, 
-                ageGroup: selectedAgeGroup,
-                latitude: location.state?.latitude,
-                longitude: location.state?.longitude
-            }
-        });
+
+        if(isLongTerm) {
+            navigate('/longTrip', { 
+                state: { 
+                    gender: selectedGender, 
+                    ageGroup: selectedAgeGroup
+                }
+            });
+        }else {
+            navigate('/travel-planner', { 
+                state: { 
+                    gender: selectedGender, 
+                    ageGroup: selectedAgeGroup,
+                    latitude: location.state?.latitude,
+                    longitude: location.state?.longitude
+                }
+            });
+        }
+    
     };
 
     useEffect(() => {

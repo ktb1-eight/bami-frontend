@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/shortTermMap.css';
 import Header from './Header';
 
 const { kakao } = window;
 
 const ShortTermMap = () => {
+  const location = useLocation();
+  
+  // URLSearchParams를 사용해 쿼리 파라미터를 파싱
+  const searchParams = new URLSearchParams(location.search);
+
+  // 개별 파라미터 값 가져오기
+  const isLongTerm = searchParams.get('longterm') === 'true';
+  const gender = searchParams.get('gender');
+  const ageGroup = searchParams.get('ageGroup');
+
   const [map, setMap] = useState(null);
   const [infowindow, setInfowindow] = useState(null);
   const [markers, setMarkers] = useState([]);
@@ -34,10 +44,24 @@ const ShortTermMap = () => {
       setMap(map);
       setInfowindow(infowindow);
 
-      kakao.maps.event.addListener(marker, 'click', () => {
-        console.log(latitude, longitude);
-        navigate('/travel-selectInfo', { state: { latitude, longitude } });
-      });
+      
+      if(isLongTerm) {
+        kakao.maps.event.addListener(marker, 'click', () => {
+          navigate('/travel-planner', { 
+            state: { 
+              gender: gender, 
+              ageGroup: ageGroup,
+              latitude: latitude,
+              longitude: longitude
+            }
+          });
+        });
+      } else {
+        kakao.maps.event.addListener(marker, 'click', () => {
+          console.log(latitude, longitude);
+          navigate('/travel-selectInfo', { state: { latitude, longitude } });
+        });
+      }
 
       kakao.maps.event.addListener(marker, 'mouseover', () => {
         infowindow.setContent(`<div style="padding:5px;font-size:12px;"> 서울 시청 </div>`);

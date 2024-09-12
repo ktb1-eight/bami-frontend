@@ -182,3 +182,43 @@ button:hover {
   font-size: 36px;
   font-family: "Regular";
 }
+
+/* long_trip.css 파일에 추가 */
+.city-dropdown {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city-dropdown label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.city-dropdown select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.city-dropdown select:focus {
+  border-color: #007bff;
+}
+
+.city-dropdown select option {
+  padding: 10px;
+}
+
+.city-dropdown select:hover {
+  cursor: pointer;
+}
