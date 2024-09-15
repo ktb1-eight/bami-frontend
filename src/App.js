@@ -47,7 +47,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/myTravel' element={<MyTravel/>}/>
+          <Route path='/myTravel' element={<MyTravel />} />
           <Route path="/longstays/recommendations" element={<LongRecommendationResult />} />
           <Route path="/longTrip" element={<LongTrip />} />
           <Route path="/login" element={<Login config={config} />} />
